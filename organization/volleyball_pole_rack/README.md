@@ -1,7 +1,9 @@
 # Volleyball Pole Rack
 
+![pole rack](volleyball_pole_rack.jpg)
+
 This holds two volleyball poles upright for storage.  In addition to the 16mm
-polywood, you need:
+plywood, you need:
 
 * 4x sturdy screws/anchors for wall mounting
 * 5/16" x 6" carriage bolt
