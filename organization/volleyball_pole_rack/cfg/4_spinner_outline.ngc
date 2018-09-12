@@ -1,0 +1,20 @@
+(cfg:Tool-Diameter: 4.0)
+(cfg:Milling-FeedRate: 1500)
+(cfg:Milling-PlungeRate: 500)
+
+(cfg:Milling-Depth: -18.7)
+(cfg:Milling-Z-Step: -4.2)
+
+(cfg:Milling-Safe-Move: 4.0)
+(cfg:Milling-Climb: 0)
+(cfg:Pockets-Pocket: 0)
+(cfg:Holding-Tabs-Activate: 0)
+
+( This should be adjusted to select EMC. )
+
+(cfg:Machine-Post: 0)
+
+( Chain to next. )
+
+(cfg:Misc-DXF-File: out/4_spinner_outline.dxf)
+(cfg:Misc-Output-File: gcode/4_spinner_outline.gcode)
