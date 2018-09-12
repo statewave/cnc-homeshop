@@ -10,9 +10,10 @@
 (cfg:Pockets-Pocket: 0)
 (cfg:Holding-Tabs-Activate: 0)
 
-( This should be adjusted to select EMC. )
+( This requires a patched version of cammill. )
 
 (cfg:Machine-Post: 0)
+(cfg:Machine-PostName: EMC)
 
 ( Chain to next. )
 

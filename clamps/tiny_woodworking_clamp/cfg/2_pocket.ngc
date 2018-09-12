@@ -13,9 +13,9 @@
 (cfg:Pockets-Island: 1)
 (cfg:Holding-Tabs-Activate: 0)
 
-( This should be adjusted to select EMC. )
+( This requires a patched version of cammill. )
 
-(cfg:Machine-Post: 2)
+(cfg:Machine-PostName: EMC)
 
 ( Do not pocket the outside outline.)
 

@@ -15,9 +15,9 @@
 (cfg:Holding-Tabs-Depth: -9.0)
 (cfg:Holding-Tabs-Length: 5.0)
 
-( This should be adjusted to select EMC. )
+( This requires a patched version of cammill. )
 
-(cfg:Machine-Post: 2)
+(cfg:Machine-PostName: EMC)
 
 ( Chain to next. )
 
