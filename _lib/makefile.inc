@@ -2,9 +2,10 @@
 # optionally define CAMERA for demo image
 
 CAMERA ?= 53,20,-5.5,50,0,23,360
+LIB ?= $(BASE)_lib.scad
 
 CAMMILL ?= cammill
-LIB = $(BASE)_lib.scad
+PNGCRUSH ?= pngcrush
 
 .PHONY: all
 all: parts plates demo
@@ -34,3 +35,4 @@ gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 %_demo.png: %_demo.scad %_lib.scad
 	openscad -o "$@" --imgsize=2048,2048 --camera=$(CAMERA) "$<"
 	convert "$@" -transparent "#ffffe5" -trim +repage "$@"
+	pngcrush -ow "$@"
