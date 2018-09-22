@@ -33,6 +33,12 @@ gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 	cat $^ > $@
 
 %_demo.png: %_demo.scad %_lib.scad
-	openscad -o "$@" --imgsize=2048,2048 --camera=$(CAMERA) "$<"
-	convert "$@" -transparent "#ffffe5" -trim +repage "$@"
-	pngcrush -ow "$@"
+	( \
+		T=$$(mktemp -d); \
+		echo "Tempdir=$$T"; \
+		openscad -o "$$T/openscad.png" --imgsize=2048,2048 --camera=$(CAMERA) "$<" && \
+		convert "$$T/openscad.png" -transparent "#ffffe5" -trim +repage "$$T/convert.png" && \
+		$(PNGCRUSH) "$$T/convert.png" && \
+		mv pngout.png "$@" && \
+		rm -r "$$T" \
+	)
