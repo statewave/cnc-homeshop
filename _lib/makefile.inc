@@ -3,6 +3,7 @@
 
 CAMERA ?= 53,20,-5.5,50,0,23,360
 LIB ?= $(BASE)_lib.scad
+PROJECTION ?= p
 
 CAMMILL ?= cammill
 PNGCRUSH ?= pngcrush
@@ -36,7 +37,7 @@ gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 	( \
 		T=$$(mktemp -d); \
 		echo "Tempdir=$$T"; \
-		openscad -o "$$T/openscad.png" --imgsize=2048,2048 --camera=$(CAMERA) "$<" && \
+		openscad -o "$$T/openscad.png" --imgsize=2048,2048 --camera=$(CAMERA) --projection=$(PROJECTION) "$<" && \
 		convert "$$T/openscad.png" -transparent "#ffffe5" -trim +repage "$$T/convert.png" && \
 		$(PNGCRUSH) "$$T/convert.png" && \
 		mv pngout.png "$@" && \
