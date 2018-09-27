@@ -1,3 +1,4 @@
 *.sw[op]
 *.bak
 .DS_Store
+*.gcode

@@ -1,10 +1,10 @@
 (cfg:Misc-Zero: 1)
-(cfg:Tool-Diameter: 4.0)
+(cfg:Tool-Diameter: 6.35)
 (cfg:Milling-FeedRate: 1500)
 (cfg:Milling-PlungeRate: 500)
 
-(cfg:Milling-Depth: -12.2)
-(cfg:Milling-Z-Step: -4.2)
+(cfg:Milling-Depth: -19.2)
+(cfg:Milling-Z-Step: -6.2)
 
 (cfg:Milling-Safe-Move: 4.0)
 (cfg:Milling-Climb: 0)
