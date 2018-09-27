@@ -1,5 +1,5 @@
 (cfg:Misc-Zero: 1)
-(cfg:Tool-Diameter: 4.0)
+(cfg:Tool-Diameter: 6.35)
 (cfg:Milling-FeedRate: 1500)
 (cfg:Milling-PlungeRate: 500)
 
@@ -21,5 +21,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/1_outline.dxf)
-(cfg:Misc-Output-File: gcode/1_outline.gcode)
+(cfg:Misc-DXF-File: out/2_outline.dxf)
+(cfg:Misc-Output-File: gcode/2_outline.gcode)
