@@ -1,6 +1,6 @@
 (cfg:Misc-Zero: 1)
 (cfg:Tool-Diameter: 6.35)
-(cfg:Milling-FeedRate: 1500)
+(cfg:Milling-FeedRate: 2500)
 (cfg:Milling-PlungeRate: 500)
 (cfg:Tool-Speed: 18000)
 
@@ -11,8 +11,8 @@
 (cfg:Milling-Climb: 0)
 (cfg:Pockets-Pocket: 0)
 (cfg:Holding-Tabs-Activate: 1)
-(cfg:Holding-Tabs-X-Grid: 90.0)
-(cfg:Holding-Tabs-Y-Grid: 9999)
+(cfg:Holding-Tabs-X-Grid: 30.0)
+(cfg:Holding-Tabs-Y-Grid: 30.0)
 (cfg:Holding-Tabs-Depth: -9.0)
 (cfg:Holding-Tabs-Length: 5.0)
 

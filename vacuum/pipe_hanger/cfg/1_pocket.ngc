@@ -1,6 +1,6 @@
 (cfg:Misc-Zero: 1)
 (cfg:Tool-Diameter: 6.35)
-(cfg:Milling-FeedRate: 1500)
+(cfg:Milling-FeedRate: 2500)
 (cfg:Milling-PlungeRate: 500)
 (cfg:Tool-Speed: 18000)
 

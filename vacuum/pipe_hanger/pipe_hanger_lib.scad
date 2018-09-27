@@ -16,18 +16,19 @@ gBitSize = 6.35;
 negative_pos = CircleCircleIntersection3(
   bottom_pos, pipe_pos, bottom_r, pipe_r+extra, negative_r, -1);
 
-intersection1_pos = Lerp(bottom_pos, negative_pos, negative_r/(negative_r+bottom_r));
-intersection2_pos = Lerp(pipe_pos, negative_pos, negative_r/(negative_r+pipe_r+extra));
+intersection1_pos = Lerp(bottom_pos, negative_pos, bottom_r/(negative_r+bottom_r));
+intersection2_pos = Lerp(pipe_pos, negative_pos, (pipe_r+extra)/(negative_r+pipe_r+extra));
 
 
 module Outline() {
   difference() {
     union() {
+      translate([0,-1]) square([1,1]);
       translate(pipe_pos) circle(r=pipe_r+extra,$fn=256);
       translate(bottom_pos) circle(r=bottom_r,$fn=256);
-      polygon(points=[[0,0],bottom_pos,negative_pos,pipe_pos]);
+      polygon(points=[bottom_pos, intersection1_pos, intersection2_pos, pipe_pos, [0,0]]);
     }
-    translate(negative_pos) circle(r=negative_r,$fn=256);
+    translate(negative_pos) circle(r=negative_r+0.1,$fn=256);
     translate(pipe_pos) circle(r=pipe_r,$fn=256);
     // back cutout
     hull()
