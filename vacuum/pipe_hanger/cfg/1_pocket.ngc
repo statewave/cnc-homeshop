@@ -2,6 +2,7 @@
 (cfg:Tool-Diameter: 6.35)
 (cfg:Milling-FeedRate: 1500)
 (cfg:Milling-PlungeRate: 500)
+(cfg:Tool-Speed: 18000)
 
 (cfg:Milling-Depth: -1.0)
 (cfg:Milling-Z-Step: -3.0)
