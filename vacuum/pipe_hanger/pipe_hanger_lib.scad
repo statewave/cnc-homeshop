@@ -53,8 +53,10 @@ module Outline() {
 
 // slight overlap with outline on left to avoid thin sliver
 module Pocket() {
-  translate([-1,-gBitSize/2])
-    square([gMaterialThickness+1,h+gBitSize]);
+  for(y=[0,h-mount])
+    translate([-1,y-gBitSize/2])
+    square([gMaterialThickness+1,mount+gBitSize]);
+
   translate([pipe_pos[0]+pipe_r-gBitSize,h-gMaterialThickness])
     square([extra+gBitSize*1.5,gMaterialThickness+1]);
 }
