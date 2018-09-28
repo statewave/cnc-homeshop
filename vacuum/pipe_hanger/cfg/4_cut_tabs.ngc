@@ -1,8 +1,8 @@
 (cfg:Misc-Zero: 1)
 (cfg:Tool-Diameter: 6.35)
+(cfg:Tool-Speed: 18000)
 (cfg:Milling-FeedRate: 2500)
 (cfg:Milling-PlungeRate: 500)
-(cfg:Tool-Speed: 18000)
 
 (cfg:Milling-Depth: -12.2)
 (cfg:Milling-Z-Step: -12.2)
@@ -18,5 +18,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/3_cut_tabs.dxf)
-(cfg:Misc-Output-File: gcode/3_cut_tabs.gcode)
+(cfg:Misc-DXF-File: out/4_cut_tabs.dxf)
+(cfg:Misc-Output-File: gcode/4_cut_tabs.gcode)

@@ -4,8 +4,8 @@
 (cfg:Milling-FeedRate: 2500)
 (cfg:Milling-PlungeRate: 500)
 
-(cfg:Milling-Depth: -1.0)
-(cfg:Milling-Z-Step: -3.0)
+(cfg:Milling-Depth: -12.2)
+(cfg:Milling-Z-Step: -6.0)
 
 (cfg:Milling-Safe-Move: 4.0)
 (cfg:Milling-Climb: 0)
@@ -24,5 +24,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/1_pocket.dxf)
-(cfg:Misc-Output-File: gcode/1_pocket.gcode)
+(cfg:Misc-DXF-File: out/2_obliterate_middle.dxf)
+(cfg:Misc-Output-File: gcode/2_obliterate_middle.gcode)
