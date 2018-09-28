@@ -48,7 +48,7 @@ check: $(patsubst %,gcode/%.gcode,$(PLATES))
 		echo "Tempdir=$$T"; \
 		openscad -o "$$T/openscad.png" --imgsize=2048,2048 --camera=$(CAMERA) --projection=$(PROJECTION) "$<" && \
 		convert "$$T/openscad.png" -transparent "#ffffe5" -trim +repage "$$T/convert.png" && \
-		$(PNGCRUSH) "$$T/convert.png" && \
+		$(PNGCRUSH) "$$T/convert.png" pngout.png && \
 		mv pngout.png "$@" && \
 		rm -r "$$T" \
 	)
