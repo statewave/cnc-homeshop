@@ -7,9 +7,10 @@ PROJECTION ?= p
 
 CAMMILL ?= cammill
 PNGCRUSH ?= pngcrush
+PYTHON ?= python2
 
 .PHONY: all
-all: parts plates demo
+all: check parts plates demo
 
 .PHONY: parts
 parts: $(patsubst %,out/%.dxf,$(PARTS))
@@ -32,6 +33,11 @@ gcode/%.gcode: cfg/%.ngc out/%.dxf
 
 gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 	cat $^ > $@
+
+# the complex MAKEFILE_LIST call is basically dirname(this_file)
+.PHONY: check
+check: $(patsubst %,gcode/%.gcode,$(PLATES))
+	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(patsubst %,%.scad,$(PLATES))
 
 %_demo.png: %_demo.scad %_lib.scad
 	( \
