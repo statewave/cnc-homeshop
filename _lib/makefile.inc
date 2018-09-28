@@ -2,7 +2,7 @@
 # optionally define CAMERA for demo image
 
 CAMERA ?= 53,20,-5.5,50,0,23,360
-LIB ?= $(BASE)_lib.scad
+LIB ?= $(BASE)_lib.scad $(EXTRA_LIB)
 PROJECTION ?= p
 
 CAMMILL ?= cammill
@@ -12,8 +12,12 @@ PYTHON ?= python2
 .PHONY: all
 all: check parts plates demo
 
+.PHONY: clean
+clean:
+	rm -rf out gcode $(BASE)_demo.png
+
 .PHONY: parts
-parts: $(patsubst %,out/%.dxf,$(PARTS))
+parts: $(patsubst %,gcode/%.gcode,$(PARTS))
 
 .PHONY: plates
 plates: $(patsubst %,gcode/%.gcode,$(PLATES)) gcode/0_combined.gcode
@@ -42,13 +46,13 @@ gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 check: $(patsubst %,gcode/%.gcode,$(PLATES))
 	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(patsubst %,%.scad,$(PLATES))
 
-%_demo.png: %_demo.scad %_lib.scad
+# Avoid in-place updates; convert doesn't like overwriting?
+%.png: %.scad $(LIB)
 	( \
 		T=$$(mktemp -d); \
 		echo "Tempdir=$$T"; \
 		openscad -o "$$T/openscad.png" --imgsize=2048,2048 --camera=$(CAMERA) --projection=$(PROJECTION) "$<" && \
 		convert "$$T/openscad.png" -transparent "#ffffe5" -trim +repage "$$T/convert.png" && \
-		$(PNGCRUSH) "$$T/convert.png" pngout.png && \
-		mv pngout.png "$@" && \
+		$(PNGCRUSH) "$$T/convert.png" "$@" && \
 		rm -r "$$T" \
 	)
