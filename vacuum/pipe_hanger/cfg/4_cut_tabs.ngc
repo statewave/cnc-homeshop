@@ -7,7 +7,7 @@
 (cfg:Milling-Depth: -12.2)
 (cfg:Milling-Z-Step: -12.2)
 
-(cfg:Milling-Safe-Move: 4.0)
+(cfg:Milling-Safe-Move: 30.0)
 (cfg:Milling-Climb: 0)
 (cfg:Pockets-Pocket: 0)
 (cfg:Holding-Tabs-Activate: 0)

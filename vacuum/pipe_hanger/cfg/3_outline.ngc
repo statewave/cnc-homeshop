@@ -7,14 +7,14 @@
 (cfg:Milling-Depth: -12.2)
 (cfg:Milling-Z-Step: -4.2)
 
-(cfg:Milling-Safe-Move: 4.0)
+(cfg:Milling-Safe-Move: 30.0)
 (cfg:Milling-Climb: 0)
 (cfg:Pockets-Pocket: 0)
 (cfg:Holding-Tabs-Activate: 1)
 (cfg:Holding-Tabs-X-Grid: 30.0)
 (cfg:Holding-Tabs-Y-Grid: 30.0)
 (cfg:Holding-Tabs-Depth: -9.0)
-(cfg:Holding-Tabs-Length: 5.0)
+(cfg:Holding-Tabs-Length: 20.0)
 
 ( This requires a patched version of cammill. )
 
