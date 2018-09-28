@@ -1,7 +1,7 @@
 include <pipe_hanger_lib.scad>;
 
 rotate([90,0,0]) difference() {
-  linear_extrude(height=12) DiagonalFit(pair_bounding_box) Outline();
+  linear_extrude(height=12) Outline();
   translate([0,0,11]) linear_extrude(height=12, convexity=6)
     offset(r=gBitSize/2,$fn=32) offset(delta=-gBitSize/2) Pocket();
 }
