@@ -13,6 +13,7 @@ gMaterialThickness = 12.1;
 gBitSize = 6.35;
 
 h = 210;
+pitch = h + gBitSize*2;
 mount = 60;
 cutout_r = 25;
 pair_bounding_box = [270,h];
@@ -73,6 +74,10 @@ module EmbeddedMounts() {
   translate([0,h/2]) Mount();
 }
 
+module ShortMount() {
+  translate([0,-extra/2]) square([16,extra]);
+}
+
 // This should be symmetrical, so calling Many() MiddleSection() is fine.
 module MiddleSection() {
   // these numbers are hard to make parametric; ideally this should leave a
@@ -86,7 +91,7 @@ module MiddleSection() {
 
 module Many() {
   DiagonalFit(pair_bounding_box) children();
-  translate([0,h + gBitSize*2])
+  translate([0,pitch])
     DiagonalFit(pair_bounding_box)
     translate([0,h])
     scale([1,-1]) children();

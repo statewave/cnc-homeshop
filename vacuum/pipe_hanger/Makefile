@@ -1,5 +1,5 @@
 BASE=pipe_hanger
-PARTS=
+PARTS=5_short_mount
 # omit 3_cut_tabs until it works better
 PLATES=1_pocket 2_obliterate_middle 3_outline
 EXTRA_LIB=../../_lib/trig.scad ../../_lib/repeat.scad

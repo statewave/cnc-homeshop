@@ -1,0 +1,31 @@
+(cfg:Misc-Zero: 1)
+(cfg:Tool-Diameter: 6.35)
+(cfg:Tool-Speed: 18000)
+(cfg:Milling-FeedRate: 2500)
+(cfg:Milling-PlungeRate: 500)
+
+(cfg:Milling-Depth: -12.2)
+(cfg:Milling-Z-Step: -6.2)
+
+(cfg:Milling-Safe-Move: 30.0)
+(cfg:Milling-Climb: 0)
+(cfg:Pockets-Pocket: 0)
+(cfg:Holding-Tabs-Activate: 1)
+(cfg:Holding-Tabs-X-Grid: 12.5)
+(cfg:Holding-Tabs-Y-Grid: 20)
+(cfg:Holding-Tabs-Depth: -6.0)
+(cfg:Holding-Tabs-Length: 6.0)
+
+( This requires a patched version of cammill. )
+
+(cfg:Machine-PostName: EMC)
+
+( Do not cut the silly lower-left pixel. )
+( This is doubly silly until https://github.com/thatch/cammill/issues/9 )
+
+(cfg:object-24-use: 0)
+
+( Chain to next. )
+
+(cfg:Misc-DXF-File: out/5_short_mount.dxf)
+(cfg:Misc-Output-File: gcode/5_short_mount.gcode)
