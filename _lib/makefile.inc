@@ -34,7 +34,8 @@ gcode/%.gcode: cfg/%.ngc out/%.dxf
 # Omit tool changes and spindle-off; leave M02 to require cycle-start between
 # tasks.
 gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
-	cat $^ | grep -v '^\(M06\|M05\)' > $@
+	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
+	echo "M05" >> "$@"
 
 # the complex MAKEFILE_LIST call is basically dirname(this_file)
 .PHONY: check

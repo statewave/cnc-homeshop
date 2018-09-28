@@ -9,7 +9,7 @@ negative_r = 200;
 extra = 30;
 air_r = 16.75/2;
 
-gMaterialThickness = 12;
+gMaterialThickness = 12.1;
 gBitSize = 6.35;
 
 h = 210;
@@ -45,14 +45,18 @@ module Outline() {
       for(y=[mount+cutout_r,h-mount-cutout_r]) translate([0,y]) circle(r=cutout_r,$fn=128);
     translate([gMaterialThickness+air_r,30]) circle(r=air_r,$fn=128);
     // trim top/left
-    translate([0,h]) square([1000,1000]);
-    translate([-1000,0]) square([1000,1000]);
+    translate([0,h]) square([1000,200]);
+    translate([-200,0]) square([200,1000]);
+    translate([0,-1]) square([1000,1.1]);
   }
 }
 
+// slight overlap with outline on left to avoid thin sliver
 module Pocket() {
-  translate([-gBitSize/2,-gBitSize/2])
-    square([gMaterialThickness+gBitSize/2,h+gBitSize]);
+  translate([-1,-gBitSize/2])
+    square([gMaterialThickness+1,h+gBitSize]);
+  translate([pipe_pos[0]+pipe_r-gBitSize,h-gMaterialThickness])
+    square([extra+gBitSize*1.5,gMaterialThickness+1]);
 }
 
 module Mount() {
