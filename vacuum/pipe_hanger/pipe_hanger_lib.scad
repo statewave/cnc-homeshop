@@ -80,7 +80,7 @@ module MiddleSection() {
   offset(r=3) difference() {
     translate([pair_bounding_box[0]/2,pair_bounding_box[1]/2])
       rotate([0,0,30]) scale([5,1]) circle(d=25);
-    DiagonalFit(pair_bounding_box) offset(delta=4) Outline();
+    DiagonalFit(pair_bounding_box) offset(delta=8) Outline();
   }
 }
 
