@@ -1,0 +1,27 @@
+(cfg:Tool-Diameter: 4.0)
+(cfg:Milling-FeedRate: 1500)
+(cfg:Milling-PlungeRate: 500)
+
+(cfg:Milling-Depth: -12.2)
+(cfg:Milling-Z-Step: -4.2)
+
+(cfg:Milling-Safe-Move: 4.0)
+(cfg:Milling-Climb: 0)
+(cfg:Pockets-Pocket: 0)
+(cfg:Holding-Tabs-Activate: 1)
+
+(cfg:Holding-Tabs-X-Grid: 60)
+(cfg:Holding-Tabs-Y-Grid: 999)
+(cfg:Holding-Tabs-Depth: -6)
+(cfg:Holding-Tabs-Length: 10)
+(cfg:Holding-Tabs-Triangle-Type: 0)
+
+( This requires a patched version of cammill. )
+
+(cfg:Machine-Post: 0)
+(cfg:Machine-PostName: EMC)
+
+( Chain to next. )
+
+(cfg:Misc-DXF-File: out/base2.dxf)
+(cfg:Misc-Output-File: gcode/base2.gcode)
