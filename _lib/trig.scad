@@ -9,6 +9,11 @@ function Add(p1, p2) = [p1[0] + p2[0], p1[1] + p2[1]];
 function Sub(p1, p2) = [p1[0] - p2[0], p1[1] - p2[1]];
 function Mult(p, x) = [p[0]*x, p[1]*x];
 function Lerp(a, b, p) = Add(a, Mult(Sub(b, a), p));
+function LineDist(a, b, p) = let(
+  d=Sub(b, a),
+  n=Magnitude(d)) (
+    (p[0]-a[0]) * (b[1]-a[1]) -
+    (p[1]-a[1]) * (b[0]-a[0])) / n;
 
 // TODO: use a rotation matrix
 function Rot2d(p, theta) =
