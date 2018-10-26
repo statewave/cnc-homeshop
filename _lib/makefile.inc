@@ -43,8 +43,8 @@ gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 
 # the complex MAKEFILE_LIST call is basically dirname(this_file)
 .PHONY: check
-check: $(patsubst %,gcode/%.gcode,$(PLATES))
-	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(patsubst %,%.scad,$(PLATES))
+check:
+	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(patsubst %,%.scad,$(PLATES)) $(patsubst %,%.scad,$(PARTS))
 
 # Avoid in-place updates; convert doesn't like overwriting?
 %.png: %.scad $(LIB)
