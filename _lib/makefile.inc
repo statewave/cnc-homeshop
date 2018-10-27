@@ -35,8 +35,7 @@ gcode/%.gcode: cfg/%.ngc out/%.dxf
 	mkdir -p gcode
 	$(CAMMILL) -d $< -o $@ -bm 1
 
-# Omit tool changes and spindle-off; leave M02 to require cycle-start between
-# tasks.
+# Omit tool changes and spindle-off; leave M01 as an optional pause in Mach3.
 gcode/0_combined.gcode: $(patsubst %,gcode/%.gcode,$(PLATES))
 	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
 	echo "M05" >> "$@"
