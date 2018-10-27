@@ -8,10 +8,11 @@ CHECKED = set()
 
 def check(filename):
     absfilename = os.path.abspath(filename)
+    absdir = os.path.dirname(absfilename)
     if absfilename in CHECKED:
         return
     CHECKED.add(absfilename)
-    print("Checking " + filename)
+    print("Checking " + os.path.relpath(filename, os.getcwd()))
     with open(filename) as fo:
         lnum = 0
         stack = []
@@ -21,7 +22,8 @@ def check(filename):
             # can span lines?
             # TODO parse strings
             if line.startswith('include'):
-                check(line.split('<')[1].split('>')[0])
+                t = line.split('<')[1].split('>')[0]
+                check(os.path.join(absdir, t))
             else:
                 for c in line:
                     if c in open_braces:
