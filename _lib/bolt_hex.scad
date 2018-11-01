@@ -1,5 +1,7 @@
+// bolt dia, nut flats, nut thick
 quarter_inch = [6.5, 11, 4.5];
 five_sixteenths_inch = [8.0, 12.55, 5.6];
+three_eighths_inch = [10.0, 14.25, 8];
 
 FLAT_SCALE = sin(60);  // approx 0.866
 
