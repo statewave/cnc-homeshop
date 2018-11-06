@@ -21,5 +21,5 @@ function _bezier_recurse(points, low, high, max_error, first_time) =
       [b] );
 
 // TODO: Verify that final point is always included
-function bezier_points(points, max_error) = 
-  concat([points[0]], _bezier_recurse(points, 0, 1, max_error, true));
+function bezier_points(points, max_error, begin=0, end=1) =
+  concat([_bezier_reduce(points, begin)], _bezier_recurse(points, begin, end, max_error, true));

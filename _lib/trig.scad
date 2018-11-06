@@ -3,7 +3,7 @@
 function Magnitude(p) = sqrt((p[0]*p[0])+(p[1]*p[1]));
 function Norm(p) = [p[0]/Magnitude(p), p[1]/Magnitude(p)];
 function Rt(p) = [p[1], -p[0]];
-function Lt(p) = Rt(Rt(Rt(p)));
+function Lt(p) = [-p[1], p[0]];
 function Bisect(p1, p2) = [(p1[0]+p2[0])/2, (p1[1]+p2[1])/2];
 function Add(p1, p2) = [p1[0] + p2[0], p1[1] + p2[1]];
 function Sub(p1, p2) = [p1[0] - p2[0], p1[1] - p2[1]];
@@ -14,6 +14,7 @@ function LineDist(a, b, p) = let(
   n=Magnitude(d)) (
     (p[0]-a[0]) * (b[1]-a[1]) -
     (p[1]-a[1]) * (b[0]-a[0])) / n;
+function Setlen(v, l) = Mult(Norm(v), l);
 
 // TODO: use a rotation matrix
 function Rot2d(p, theta) =
