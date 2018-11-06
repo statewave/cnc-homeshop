@@ -1,9 +1,14 @@
 module SpikeBox(dims, cutter_dia, center=false) {
-  off = 0.78 * cutter_dia / 2;
+  // This is intentionally tighter than just doing the math; wood compresses.
+  off = 0.8 * cutter_dia / 2;
   translate(center ? [0,0] : [dims[0]/2,dims[1]/2]) {
-    square(dims, center=true);
-    for(x_scale=[1,-1], y_scale=[1,-1])
-      translate([(dims[0]/2-off)*x_scale, (dims[1]/2-off)*y_scale])
+    hull() for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
+      translate([dims[0]/2-1,dims[1]/2-1])
+      circle(r=1,$fn=8);
+    // To debug corner intersection...
+    // square(dims, center=true);
+    for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
+      translate([dims[0]/2-off, dims[1]/2-off])
       circle(d=cutter_dia,$fn=64);
   }
 }
