@@ -20,7 +20,7 @@ clean:
 parts: $(patsubst %,gcode/%.gcode,$(PARTS))
 
 .PHONY: plates
-plates: $(patsubst %,gcode/%.gcode,$(PLATES)) gcode/0_combined.gcode
+plates: $(patsubst %,gcode/%.gcode,$(PLATES)) $(if $(PLATES),gcode/0_combined.gcode)
 
 .PHONY: demo
 demo: $(BASE)_demo.png
