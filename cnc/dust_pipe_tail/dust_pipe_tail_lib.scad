@@ -1,3 +1,5 @@
+include <../../_lib/fillets.scad>;
+
 gMaterialThick = 12.2;
 gBitSize = 6.35;
 gPocketDepth = 4;
@@ -29,16 +31,8 @@ gVerticalOffset = gEndDia/2+5;
 gVerticalLength = gJointLength-gVerticalOffset*2;
 
 module DogBonePocket() {
-  translate([gVerticalOffset,-gMaterialThick/2]) SpikeBox([gVerticalLength,gMaterialThick]);  
-}
-
-module SpikeBox(dims, center=false) {
-  o=gBitSize*sqrt(2)/4;
-  translate(center?[0,0]:[dims[0]/2,dims[1]/2]) {
-    square(dims, center=true);
-    for(x_scale=[1,-1],y_scale=[1,-1]) scale([x_scale,y_scale])
-      translate([dims[0]/2-o,dims[1]/2-o]) circle(d=gBitSize,$fn=32);
-  }
+  translate([gVerticalOffset,-gMaterialThick/2])
+    SpikeBox([gVerticalLength,gMaterialThick], gBitSize);
 }
 
 module Vertical(h) {
