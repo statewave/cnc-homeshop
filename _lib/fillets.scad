@@ -4,7 +4,7 @@ module SpikeBox(dims, cutter_dia, center=false) {
   translate(center ? [0,0] : [dims[0]/2,dims[1]/2]) {
     hull() for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
       translate([dims[0]/2-1,dims[1]/2-1])
-      circle(r=1,$fn=8);
+      polygon(points=[[0,0], [1,0], [0,1]], convexity=2);
     // To debug corner intersection...
     // square(dims, center=true);
     for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
