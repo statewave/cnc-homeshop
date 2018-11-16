@@ -3,6 +3,7 @@ BASE=dust_pipe_tail
 # treated as a plate with its own combined.
 PARTS=4_verticals
 PLATES=1_hole 2_pocket 3_outline
+LIBS=../../_lib/fillets.scad
 CAMERA=496,48,97,67,0,44,1425
 
 include ../../_lib/makefile.inc
