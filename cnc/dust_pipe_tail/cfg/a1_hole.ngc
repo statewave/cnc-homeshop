@@ -22,5 +22,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/1_hole.dxf)
-(cfg:Misc-Output-File: gcode/1_hole.gcode)
+(cfg:Misc-DXF-File: out/a1_hole.dxf)
+(cfg:Misc-Output-File: gcode/a1_hole.gcode)

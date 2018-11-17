@@ -3,13 +3,14 @@
 (cfg:Milling-FeedRate: 2500)
 (cfg:Milling-PlungeRate: 500)
 
-(cfg:Milling-Depth: -12.2)
-(cfg:Milling-Z-Step: -4.2)
-(cfg:Milling-Helix: 1)
+(cfg:Milling-Depth: -6.0)
+(cfg:Milling-Z-Step: -6.0)
 
 (cfg:Milling-Safe-Move: 4.0)
 (cfg:Milling-Climb: 0)
-(cfg:Pockets-Pocket: 0)
+(cfg:Pockets-Pocket: 1)
+(cfg:Pockets-Pocket-Stepover: 80)
+(cfg:Pockets-Island: 1)
 (cfg:Holding-Tabs-Activate: 0)
 
 ( This requires a patched version of cammill. )
@@ -22,5 +23,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/5_mount_hole.dxf)
-(cfg:Misc-Output-File: gcode/5_mount_hole.gcode)
+(cfg:Misc-DXF-File: out/a2_pocket.dxf)
+(cfg:Misc-Output-File: gcode/a2_pocket.gcode)

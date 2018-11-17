@@ -21,5 +21,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/7_mount_outline.dxf)
-(cfg:Misc-Output-File: gcode/7_mount_outline.gcode)
+(cfg:Misc-DXF-File: out/c3_mount_outline.dxf)
+(cfg:Misc-Output-File: gcode/c3_mount_outline.gcode)

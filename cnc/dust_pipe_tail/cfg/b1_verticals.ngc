@@ -21,5 +21,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/4_verticals.dxf)
-(cfg:Misc-Output-File: gcode/4_verticals.gcode)
+(cfg:Misc-DXF-File: out/b1_verticals.dxf)
+(cfg:Misc-Output-File: gcode/b1_verticals.gcode)

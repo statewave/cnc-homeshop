@@ -23,5 +23,5 @@
 
 ( Chain to next. )
 
-(cfg:Misc-DXF-File: out/6_mount_pocket.dxf)
-(cfg:Misc-Output-File: gcode/6_mount_pocket.gcode)
+(cfg:Misc-DXF-File: out/c2_mount_pocket.dxf)
+(cfg:Misc-Output-File: gcode/c2_mount_pocket.gcode)
