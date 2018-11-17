@@ -1,0 +1,27 @@
+(cfg:Misc-Zero: 1)
+(cfg:Tool-Diameter: 6.35)
+(cfg:Milling-FeedRate: 2500)
+(cfg:Milling-PlungeRate: 500)
+
+(cfg:Milling-Depth: -6.0)
+(cfg:Milling-Z-Step: -6.0)
+
+(cfg:Milling-Safe-Move: 4.0)
+(cfg:Milling-Climb: 0)
+(cfg:Pockets-Pocket: 1)
+(cfg:Pockets-Pocket-Stepover: 80)
+(cfg:Pockets-Island: 1)
+(cfg:Holding-Tabs-Activate: 0)
+
+( This requires a patched version of cammill. )
+
+(cfg:Machine-PostName: EMC)
+
+( Do not pocket the outside outline.)
+
+(cfg:object-0-use: 0)
+
+( Chain to next. )
+
+(cfg:Misc-DXF-File: out/6_mount_pocket.dxf)
+(cfg:Misc-Output-File: gcode/6_mount_pocket.gcode)

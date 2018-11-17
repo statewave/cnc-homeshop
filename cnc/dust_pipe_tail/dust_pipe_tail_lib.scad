@@ -1,4 +1,5 @@
 include <../../_lib/fillets.scad>;
+include <shield.scad>;
 
 gMaterialThick = 12.2;
 gBitSize = 6.35*1.1;
@@ -66,4 +67,54 @@ module DogBones() {
     translate([i*pitch,0]) children();
     translate([i*pitch+t2,t1]) children();
   }
+}
+
+module MountPivot() {
+  hull() {
+    circle(d=gEndDia,$fn=256);
+    translate([0,-gEndDia/2-gPocketDepth-4])
+      square([gEndDia*1.5,gPocketDepth], center=true);
+  }
+}
+
+// TODO not entirely sure these are right, and certainly
+// aren't if using a different thickness for the mount
+// vs rest of tail.
+gMountPivotPositions = [
+  -gMaterialThick*2+gPocketDepth-gWasherThickness,
+  gStartVerticalHeight-gMaterialThick*2
+];
+
+module MountPivotHole() {
+  circle(d=gPinDia,$fn=32);
+}
+
+gMountPlateZero = [105,61];
+
+module MountPlate() {
+  translate([0,35]) scale([1.2,1.2]) Shield();
+}
+module MountPlatePocket() {
+  for(y=gMountPivotPositions) translate([0,y+gMaterialThick/2])
+    SpikeBox([gEndDia*1.5,gMaterialThick], gBitSize, center=true);
+}
+
+
+module MountPlateDemo() {
+  difference() {
+    linear_extrude(height=gMaterialThick,convexity=4)
+    difference() {
+      MountPlate();
+      //MountPlateHoles();
+    }
+    translate([0,0,gMaterialThick-gPocketDepth])
+      linear_extrude(height=gMaterialThick,convexity=8)
+      MountPlatePocket();
+  }
+}
+
+module MountDemo() {
+  for(y=gMountPivotPositions) translate([0,0,y])
+    rotate([0,0,-90]) linear_extrude(height=gMaterialThick,convexity=4) MountPivot();
+  translate([-50,0,0]) rotate([90,0,90]) MountPlateDemo();
 }
