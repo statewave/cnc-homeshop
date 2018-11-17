@@ -62,13 +62,13 @@ def gettype(m):
 
 
 def check(base_dir, filename):
-    absfilename = os.path.abspath(filename)
+    absfilename = os.path.join(base_dir, filename)
     absdir = os.path.dirname(absfilename)
     if absfilename in CHECKED_FILES:
         # TODO still check for shadowed names
         return
     f = CHECKED_FILES[absfilename] = ScadFile(absfilename)
-    print("Checking " + os.path.relpath(filename, base_dir))
+    print("Checking", base_dir, filename, absfilename)
     if not f.parse() or not f.verify():
         print(f.fatal_errors)
         sys.exit(1)
