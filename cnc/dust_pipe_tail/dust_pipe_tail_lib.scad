@@ -115,6 +115,9 @@ module MountPlateDemo() {
 
 module MountDemo() {
   for(y=gMountPivotPositions) translate([0,0,y])
-    rotate([0,0,-90]) linear_extrude(height=gMaterialThick,convexity=4) MountPivot();
+    rotate([0,0,-90]) linear_extrude(height=gMaterialThick,convexity=4) difference() {
+    MountPivot();
+    MountPivotHole();
+  }
   translate([-50,0,0]) rotate([90,0,90]) MountPlateDemo();
 }
