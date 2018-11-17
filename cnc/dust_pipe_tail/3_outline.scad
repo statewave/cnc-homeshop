@@ -1,3 +1,3 @@
 include <dust_pipe_tail_lib.scad>;
 
-translate([15,20]) DogBones() DogBone();
+translate([gEndDia/2,gEndDia/2]) DogBones() DogBone();

@@ -1,7 +1,7 @@
 include <dust_pipe_tail_lib.scad>;
 
 module Part1() {
-  difference() {
+  rotate([0,0,-90]) difference() {
     linear_extrude(height=gMaterialThick, convexity=6) difference() {
       DogBone();
       DogBoneHoles();
@@ -12,7 +12,8 @@ module Part1() {
 }
 
 module Part2(h) {
-  translate([gVerticalOffset,gMaterialThick/2,0]) rotate([90,0,0]) linear_extrude(height=gMaterialThick) Vertical(h);
+  translate([gVerticalOffset,gMaterialThick/2,0]) rotate([90,0,0])
+    linear_extrude(height=gMaterialThick) Vertical(h);
 }
 
 remaining_after_pocket = gMaterialThick-gPocketDepth;

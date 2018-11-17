@@ -7,33 +7,36 @@ gPocketDepth = 4;
 gPinDia = 8;
 gEndDia = 30;
 // Pin-to-pin
-gJointLength = 305;
-gWasherThickness = 3;
+gJointLength = 500;
+// Whether this performs as intended is very dependent on the accuracy of
+// gPocketDepth in reality -- that is, how well your z is zeroed.
+gWasherThickness = 2;
 gStartVerticalHeight = 180;
-gNumVerticals = 6;
+gNumVerticals = 3;
 gReduce = gWasherThickness * 2 + gMaterialThick * 2;
 
 // TODO: Angle-limiting
 module DogBone() {
   offset(r=-10,$fn=64) offset(delta=10) {
     $fn = 128;
-    translate([0,-12.5]) square([gJointLength,25]);
-    for(x=[0,gJointLength]) translate([x,0]) circle(d=30);
+    translate([-12.5,0]) square([25,gJointLength]);
+    for(y=[0,gJointLength]) translate([0,y]) circle(d=30);
   }
 }
 
 module DogBoneHoles() {
   $fn = 32;
-  for(x=[0,gJointLength]) translate([x,0]) circle(d=gPinDia);
+  for(y=[0,gJointLength]) translate([0,y]) circle(d=gPinDia);
 }
 
 gVerticalOffset = gEndDia/2+5;
 gVerticalLength = gJointLength-gVerticalOffset*2;
 
 module DogBonePocket() {
+  // slight fillet on SpikeBox
   offset(r=-1,$fn=32) offset(delta=1)
-    translate([gVerticalOffset,-gMaterialThick/2])
-    SpikeBox([gVerticalLength,gMaterialThick], gBitSize);
+    translate([-gMaterialThick/2,gVerticalOffset])
+    SpikeBox([gMaterialThick,gVerticalLength], gBitSize);
 }
 
 module Vertical(h) {
@@ -46,22 +49,21 @@ module Vertical(h) {
   }
 }
 
-// TODO: The 50 here might be because of a bug.
 function vh(i) = gStartVerticalHeight - gReduce * i;
 function vo(i) = i == 0 ? 0 : vh(i-1) + vo(i-1) + gBitSize;
 
 module Verticals() {
   for(i=[0:gNumVerticals-1]) {
-    translate([10,vo(i)]) Vertical(vh(i));
+    translate([vo(i)+vh(i),10]) rotate([0,0,90]) Vertical(vh(i));
   }
 }
 
 module DogBones() {
   t1 = 25;
   t2 = 35;
-  pitch = 90;
+  pitch = 70;
   for(i=[0:gNumVerticals-1]) {
-    translate([0,i*pitch]) children();
-    translate([t1,i*pitch+t2]) children();
+    translate([i*pitch,0]) children();
+    translate([i*pitch+t2,t1]) children();
   }
 }
