@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import re
 import os
 import sys
@@ -68,7 +70,7 @@ def check(base_dir, filename):
         # TODO still check for shadowed names
         return
     f = CHECKED_FILES[absfilename] = ScadFile(absfilename)
-    print("Checking", base_dir, filename, absfilename)
+    print("Checking", filename)
     if not f.parse() or not f.verify():
         print(f.fatal_errors)
         sys.exit(1)
@@ -157,7 +159,7 @@ class ScadFile(object):
 
         while i < len(self.tokens):
             ttype, lnum, cnum, text, groups = self.tokens[i]
-            print(i, ttype, repr(text))
+            # print(i, ttype, repr(text))
             if ttype == "include":
                 self.includes.append(groups["include_name"])
             elif ttype == "reserved" and text == "function":
