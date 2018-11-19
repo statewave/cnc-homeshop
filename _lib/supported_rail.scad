@@ -50,3 +50,12 @@ module LinearHolePattern(y_spacing, total_dist) {
 module RailPocket(spec, length, bit_size) {
   translate([0,length/2]) SpikeBox([spec[1], length], bit_size, center=true);
 }
+
+module RailBlockDemo(spec, y) {
+  translate([0,y,spec[2]]) cube([spec[5][0], spec[5][1], spec[3]*2], center=true);
+}
+
+module RailBlockHoles(spec, y) {
+  translate([0,y]) for(x_scale=[1,-1],y_scale=[1,-1]) scale([x_scale,y_scale])
+    translate([spec[4][0]/2,spec[4][1]/2]) circle(d=spec[4][2],$fn=32);
+}
