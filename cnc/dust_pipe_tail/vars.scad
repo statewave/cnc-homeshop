@@ -1,5 +1,5 @@
 include <dust_pipe_tail_lib.scad>;
 
-echo("gMaterialThick", gMaterialThick);
-echo("gRealBitSize", gRealBitSize);
+echo("gCutDepth", -gCutDepth);
+echo("gBitSize", gBitSize);
 echo("gPocketDepth", -gPocketDepth);

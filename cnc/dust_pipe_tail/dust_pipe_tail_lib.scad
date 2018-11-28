@@ -2,9 +2,8 @@ include <../../_lib/fillets.scad>;
 include <shield.scad>;
 
 gMaterialThick = 12;
-gCutDepth = -(gMaterialThick+0.2);
-gRealBitSize = 6.35;
-gBitSize = gRealBitSize*1.1;
+gCutDepth = gMaterialThick+0.2;
+gBitSize = 6.35;
 gPocketDepth = 4;
 
 gPinDia = 8;
@@ -39,7 +38,7 @@ module DogBonePocket() {
   // slight fillet on SpikeBox
   offset(r=-1,$fn=32) offset(delta=1)
     translate([-gMaterialThick/2,gVerticalOffset])
-    SpikeBox([gMaterialThick,gVerticalLength], gBitSize);
+    SpikeBox([gMaterialThick,gVerticalLength], gBitSize*1.1);
 }
 
 module Vertical(h) {
@@ -53,7 +52,7 @@ module Vertical(h) {
 }
 
 function vh(i) = gStartVerticalHeight - gReduce * i;
-function vo(i) = i == 0 ? 0 : vh(i-1) + vo(i-1) + gBitSize;
+function vo(i) = i == 0 ? 0 : vh(i-1) + vo(i-1) + gBitSize*1.1;
 
 module Verticals() {
   for(i=[0:gNumVerticals-1]) {
@@ -98,7 +97,7 @@ module MountPlate() {
 }
 module MountPlatePocket() {
   for(y=gMountPivotPositions) translate([0,y+gMaterialThick/2])
-    SpikeBox([gEndDia*1.5,gMaterialThick], gBitSize, center=true);
+    SpikeBox([gEndDia*1.5,gMaterialThick], gBitSize*1.1, center=true);
 }
 
 

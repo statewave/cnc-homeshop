@@ -14,6 +14,8 @@ LIB_DIR = $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 CONFIG_LIBS = $(wildcard $(LIB_DIR)/cam/*.config) $(EXTRA_LIB)
 VARS_TARGET= $(patsubst %.scad,%.txt,$(wildcard vars.scad))
 
+ALL_SCAD=$(patsubst %,%.scad,$(PLATES) $(PARTS) $(A_PLATES) $(B_PLATES) $(C_PLATES))
+
 .PHONY: all
 all: check parts plates
 
@@ -51,7 +53,7 @@ out/%.dxf: %.scad $(LIB)
 
 .PHONY: showcfgdeps
 showcfgdeps:
-	@echo vars.txt $(CONFIG_LIBS)
+	@echo $(VARS_TARGET) $(CONFIG_LIBS)
 
 # This naming is a bit of technical debt, to avoid generated (and ignored) files
 # having the same name as ones that used to be checked in.
@@ -89,7 +91,7 @@ gcode/d0_combined.gcode: $(patsubst %,gcode/%.gcode,$(D_PLATES))
 # the complex MAKEFILE_LIST call is basically dirname(this_file)
 .PHONY: check
 check:
-	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(patsubst %,%.scad,$(PLATES)) $(patsubst %,%.scad,$(PARTS))
+	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(ALL_SCAD)
 
 # Avoid in-place updates; convert doesn't like overwriting?
 %.png: %.scad $(LIB)
