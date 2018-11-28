@@ -1,6 +1,6 @@
 include <knob_lib.scad>;
 
-linear_extrude(height=19) difference() {
+linear_extrude(height=gMaterialThick) difference() {
   Outline();
   Hole();
 }

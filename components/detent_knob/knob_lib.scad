@@ -1,3 +1,7 @@
+gMaterialThick = 19;
+gCutDepth = -(gMaterialThick+0.4);
+gBitSize = 4;
+
 gHoleDia = 16;
 gKnobDia = 55;
 gNumDetents = 2;
