@@ -1,0 +1,9 @@
+include <../../../_lib/cam/outline.config>;
+include <local.config>;
+
+(cfg:Holding-Tabs-Activate: 1)
+(cfg:Holding-Tabs-X-Grid: 9999)
+(cfg:Holding-Tabs-Y-Grid: 130.0)
+(cfg:Holding-Tabs-Depth: -2.0)
+(cfg:Holding-Tabs-Length: 10.0)
+
