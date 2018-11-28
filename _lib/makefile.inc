@@ -55,6 +55,7 @@ showcfgdeps:
 # This naming is a bit of technical debt, to avoid generated (and ignored) files
 # having the same name as ones that used to be checked in.
 out/%.ngc: cfg/%.ngc vars.txt $(CONFIG_LIBS)
+	mkdir -p out
 	$(PYTHON) $(LIB_DIR)/cam/cammill_config.py \
 		$$(cat vars.txt) \
 		-DInputName=out/$*.dxf \
