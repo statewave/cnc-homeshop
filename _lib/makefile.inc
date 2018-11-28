@@ -10,12 +10,16 @@ CAMMILL ?= cammill
 PNGCRUSH ?= pngcrush
 PYTHON ?= python2
 
+LIB_DIR = $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
+CONFIG_LIBS = $(wildcard $(LIB_DIR)/cam/*.config) $(EXTRA_LIB)
+
 .PHONY: all
-all: check parts plates demo
+all: check parts plates
 
 .PHONY: clean
 clean:
-	rm -rf out gcode $(BASE)_demo.png
+	rm -rf out gcode $(BASE)_demo.png vars.txt
+# TODO: Also remove cfg/*.ngc if cfg/*.in exists
 
 .PHONY: parts
 parts: $(patsubst %,gcode/%.gcode,$(PARTS))
@@ -31,11 +35,30 @@ plates: $(patsubst %,gcode/%.gcode,$(PLATES)) \
 .PHONY: demo
 demo: $(BASE)_demo.png
 
-.PRECIOUS: out/%.dxf gcode/%.gcode
+# ECHO: "VarName", 1.23
+vars.txt: vars.scad $(LIB)
+	# This won't actually write the file unless there is a top-level object in the
+	# lib, but will send echo to stderr.
+	openscad -o _tmp.dxf $< 2>&1 | perl -ne 'print "-D $$1=$$2 " if /ECHO: "(.*)", (.*)/' > $@
+	grep -q -v undef $@
+	rm -f _tmp.dxf || :
+
+.PRECIOUS: out/%.dxf gcode/%.gcode out/%.ngc vars.txt
 
 out/%.dxf: %.scad $(LIB)
 	mkdir -p out
 	openscad -o $@ $<
+
+.PHONY: showcfgdeps
+showcfgdeps:
+	@echo vars.txt $(CONFIG_LIBS)
+
+cfg/%.ngc: cfg/%.in vars.txt $(CONFIG_LIBS)
+	$(PYTHON) $(LIB_DIR)/cam/cammill_config.py \
+		$$(cat vars.txt) \
+		-DInputName=out/$*.dxf \
+		-DOutputName=gcode/$*.gcode \
+		$< -o $@
 
 gcode/%.gcode: cfg/%.ngc out/%.dxf
 	mkdir -p gcode

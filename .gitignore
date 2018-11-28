@@ -2,3 +2,7 @@
 *.bak
 .DS_Store
 *.gcode
+# generated dirs...
+gcode
+out
+vars.txt
