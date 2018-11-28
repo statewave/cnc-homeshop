@@ -5,6 +5,7 @@ difference() {
     KnobOutline();
     KnobHole();
   }
-  translate([0,0,5]) linear_extrude(height=10, convexity=4) KnobPocket();
+  translate([0,0,gMaterialThick-gPocketDepth])
+    linear_extrude(height=10, convexity=4) KnobPocket();
 }
 

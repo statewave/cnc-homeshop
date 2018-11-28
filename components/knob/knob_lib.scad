@@ -1,10 +1,13 @@
 include <../../_lib/lobes.scad>;
 include <../../_lib/bolt_hex.scad>;
 
+gMaterialThick = 12;
+gCutDepth = -(gMaterialThick+0.4);
+gPocketDepth = quarter_inch[2]+0.5;
+gBitSize = 4.0;
+
 gBoltDia = quarter_inch[0];
 gBoltFlats = quarter_inch[1];
-gBitSize = 4.0;
-//TODO: bit is defined in bolt_hex.scad
 
 module KnobOutline() {
   difference() {
@@ -17,7 +20,7 @@ module KnobOutline() {
 }
 
 module KnobPocket() {
-  OvercutHex(gBoltFlats, gBitSize);
+  OvercutHex(gBoltFlats, gBitSize*1.05);
 }
 
 module KnobHole() {

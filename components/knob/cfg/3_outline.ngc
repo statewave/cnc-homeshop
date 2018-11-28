@@ -1,21 +1,2 @@
-(cfg:Misc-Zero: 1)
-(cfg:Tool-Diameter: 4.0)
-(cfg:Milling-FeedRate: 1500)
-(cfg:Milling-PlungeRate: 500)
-
-(cfg:Milling-Depth: -12.4)
-(cfg:Milling-Z-Step: -6.2)
-
-(cfg:Milling-Safe-Move: 4.0)
-(cfg:Milling-Climb: 0)
-(cfg:Pockets-Pocket: 0)
-(cfg:Holding-Tabs-Activate: 0)
-
-( This requires a patched version of cammill. )
-
-(cfg:Machine-PostName: EMC)
-
-( Chain to next. )
-
-(cfg:Misc-DXF-File: out/3_outline.dxf)
-(cfg:Misc-Output-File: gcode/3_outline.gcode)
+include <../../../_lib/cam/outline.config>;
+include <local.config>;
