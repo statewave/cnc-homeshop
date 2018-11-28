@@ -1,8 +1,10 @@
 include <../../_lib/fillets.scad>;
 include <shield.scad>;
 
-gMaterialThick = 12.2;
-gBitSize = 6.35*1.1;
+gMaterialThick = 12;
+gCutDepth = -(gMaterialThick+0.2);
+gRealBitSize = 6.35;
+gBitSize = gRealBitSize*1.1;
 gPocketDepth = 4;
 
 gPinDia = 8;

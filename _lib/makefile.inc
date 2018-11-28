@@ -19,7 +19,6 @@ all: check parts plates
 .PHONY: clean
 clean:
 	rm -rf out gcode $(BASE)_demo.png vars.txt
-# TODO: Also remove cfg/*.ngc if cfg/*.in exists
 
 .PHONY: parts
 parts: $(patsubst %,gcode/%.gcode,$(PARTS))
@@ -53,14 +52,16 @@ out/%.dxf: %.scad $(LIB)
 showcfgdeps:
 	@echo vars.txt $(CONFIG_LIBS)
 
-cfg/%.ngc: cfg/%.in vars.txt $(CONFIG_LIBS)
+# This naming is a bit of technical debt, to avoid generated (and ignored) files
+# having the same name as ones that used to be checked in.
+out/%.ngc: cfg/%.ngc vars.txt $(CONFIG_LIBS)
 	$(PYTHON) $(LIB_DIR)/cam/cammill_config.py \
 		$$(cat vars.txt) \
 		-DInputName=out/$*.dxf \
 		-DOutputName=gcode/$*.gcode \
 		$< -o $@
 
-gcode/%.gcode: cfg/%.ngc out/%.dxf
+gcode/%.gcode: out/%.ngc out/%.dxf
 	mkdir -p gcode
 	$(CAMMILL) -d $< -o $@ -bm 1
 

@@ -1,5 +1,7 @@
 *.sw[op]
+*.py[co]
 *.bak
+*.baka
 .DS_Store
 *.gcode
 # generated dirs...
