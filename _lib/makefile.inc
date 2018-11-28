@@ -12,6 +12,7 @@ PYTHON ?= python2
 
 LIB_DIR = $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 CONFIG_LIBS = $(wildcard $(LIB_DIR)/cam/*.config) $(EXTRA_LIB)
+VARS_TARGET= $(patsubst %.scad,%.txt,$(wildcard vars.scad))
 
 .PHONY: all
 all: check parts plates
@@ -54,7 +55,7 @@ showcfgdeps:
 
 # This naming is a bit of technical debt, to avoid generated (and ignored) files
 # having the same name as ones that used to be checked in.
-out/%.ngc: cfg/%.ngc vars.txt $(CONFIG_LIBS)
+out/%.ngc: cfg/%.ngc $(VARS_TARGET) $(CONFIG_LIBS)
 	mkdir -p out
 	$(PYTHON) $(LIB_DIR)/cam/cammill_config.py \
 		$$(cat vars.txt) \
