@@ -1,0 +1,9 @@
+( For 6.35mm or larger cutter, this can be done in two outline passes. )
+( Otherwise, it needs to be switched to pocket here. )
+include <../../../_lib/cam/outline.config>;
+include <local.config>;
+
+(cfg:Milling-Depth: $gPocketDepth)
+
+(cfg:object-0-use: 0)
+(cfg:Holding-Tabs-Activate: 0)
