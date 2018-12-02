@@ -19,13 +19,17 @@ function PitchDia(pitch, num_teeth) = let(
   c = pitch * num_teeth,
   d = c / PI) [c,d];
 
+function PitchRadius(pitch, num_teeth) = let(
+  t = PitchDia(pitch, num_teeth)) t[1]/2;
+
 module Gear(pitch, pitch_angle, height, num_teeth) {
   specs = PitchDia(pitch, num_teeth);
   difference() {
     circle(d=specs[1]+height,$fn=256);
-    for(a=[0:1:360])
-      rotate([0,0,a])
-      translate([-a*specs[0]/360,-specs[1]/2]) render()
-        Rack(pitch, pitch_angle, height, specs[0]);
+    for(t=[0:360/num_teeth:359]) rotate([0,0,t]) render()
+      for(a=[0:1:360/num_teeth])
+        rotate([0,0,a])
+        translate([-a*specs[0]/360-pitch,-specs[1]/2]) render()
+          Rack(pitch, pitch_angle, height, pitch*3);
   }
 }
