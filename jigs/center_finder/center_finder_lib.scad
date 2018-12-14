@@ -92,3 +92,18 @@ module Demo() {
     TopHoles();
   }
 }
+
+module SingleOutline() {
+  Corner();
+  Top();
+}
+
+module TopDiff() {
+  difference() {
+    offset(r=gBitSize/2) difference() {
+      offset(delta=-1) render() Top();
+      render() Corner();
+    }
+    render() Corner();
+  }
+}
