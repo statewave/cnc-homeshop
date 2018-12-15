@@ -13,6 +13,8 @@ gHolderWidth = 100;
 gHolderLength = 150;
 gInset = 20;
 
+gZeroOffset = [gHolderWidth/2,gInsertDia/2];
+
 module Outline() {
   offset(r=5,$fn=64) offset(r=-10,$fn=64) offset(delta=5) difference() {
     union() {
