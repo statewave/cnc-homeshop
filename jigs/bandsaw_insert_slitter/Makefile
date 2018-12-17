@@ -1,5 +1,5 @@
 BASE=bandsaw_insert_slitter
-PARTS=1_pocket 2_outline
+PLATES=1_pocket 2_outline
 
 CAMERA=-3,28,6,54,0,27,450
 
