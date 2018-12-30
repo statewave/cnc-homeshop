@@ -91,7 +91,7 @@ gcode/d0_combined.gcode: $(patsubst %,gcode/%.gcode,$(D_PLATES))
 # the complex MAKEFILE_LIST call is basically dirname(this_file)
 .PHONY: check
 check:
-	$(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(ALL_SCAD)
+	EXTRA_LIB="$(EXTRA_LIB)" $(PYTHON) $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))/syntax_checker.py $(ALL_SCAD)
 
 # Avoid in-place updates; convert doesn't like overwriting?
 %.png: %.scad $(LIB)

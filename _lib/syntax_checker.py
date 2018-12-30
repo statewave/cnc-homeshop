@@ -64,18 +64,26 @@ def gettype(m):
 
 
 def check(base_dir, filename):
-    absfilename = os.path.join(base_dir, filename)
-    absdir = os.path.dirname(absfilename)
-    if absfilename in CHECKED_FILES:
+    """
+    Args:
+        base_dir: The path we start at getcwd()
+        filename: An absolute path of the include
+    """
+    if filename in CHECKED_FILES:
         # TODO still check for shadowed names
         return
-    f = CHECKED_FILES[absfilename] = ScadFile(absfilename)
-    print("Checking", filename)
+    f = CHECKED_FILES[filename] = ScadFile(filename)
+    relfilename = os.path.relpath(filename, base_dir)
+    print("Checking", relfilename)
+    if relfilename.startswith("..") and relfilename not in os.environ.get('EXTRA_LIB', '').split():
+        print("Missing EXTRA_LIB for " + relfilename)
+        sys.exit(2)
     if not f.parse() or not f.verify():
         print(f.fatal_errors)
         sys.exit(1)
     for inc in f.includes:
-        check(absdir, inc)
+        absfilename = os.path.join(os.path.dirname(filename), inc)
+        check(base_dir, absfilename)
 
 
 class NameType(enum.Enum):
@@ -212,4 +220,4 @@ if __name__ == "__main__":
         os.chdir(base_dir)
         if dirname:
             os.chdir(dirname)
-        check(base_dir, filename)
+        check(base_dir, os.path.abspath(filename))
