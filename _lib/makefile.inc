@@ -24,7 +24,7 @@ clean:
 	rm -rf out gcode $(BASE)_demo.png vars.txt
 
 .PHONY: parts
-parts: $(patsubst %,gcode/%.gcode,$(PARTS))
+parts: $(patsubst %,gcode/%.gcode,$(PARTS)) $(patsubst %,out/%.stl,$(STL_PARTS))
 
 .PHONY: plates
 plates: $(patsubst %,gcode/%.gcode,$(PLATES)) \
@@ -48,6 +48,10 @@ vars.txt: vars.scad $(LIB)
 .PRECIOUS: out/%.dxf gcode/%.gcode out/%.ngc vars.txt
 
 out/%.dxf: %.scad $(LIB)
+	mkdir -p out
+	openscad -o $@ $<
+
+out/%.stl: %.scad $(LIB)
 	mkdir -p out
 	openscad -o $@ $<
 
