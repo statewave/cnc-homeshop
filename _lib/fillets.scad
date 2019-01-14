@@ -1,4 +1,4 @@
-module SpikeBox(dims, cutter_dia, center=false, compression_mm=0.4) {
+module SpikeBox(dims, cutter_dia, center=false, compression_mm=0.2) {
   // This is intentionally tighter than just doing the math; wood compresses.
   // The direction of compression_mm is from each edge, NOT a diagonal.
   // Really it's just a fudge factor.
