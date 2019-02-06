@@ -89,7 +89,7 @@ module Side() {
     //echo(lasttabstart);
     for(y_scale=[1,-1]) scale([1,y_scale]) {
       translate([gPocketDepth/2-2, (gTopSize[1]/2+lasttabstart+6)/2])
-        SpikeBox([gPocketDepth+4, gTopSize[1]/2-lasttabstart+6], gBitSize, center=true);
+        SpikeBoxT([gPocketDepth+4, gTopSize[1]/2-lasttabstart+6], gBitSize, center=true);
       translate([gPocketDepth+12/2-3,-gTopSize[1]/2+gMaterialThickness/2-2])
         SpikeBox([12+6,gMaterialThickness+4], gBitSize, center=true);
       translate([gPocketDepth+12/2-3,-gYTabSpacing*1.5])
@@ -130,14 +130,15 @@ module ShortEdge() {
       square([gTopSize[0], gHeight-gMaterialThickness+gPocketDepth-1]);
     for(i=[-0.5,0.5])
       translate([gXTabSpacing*i, gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBox([gXTabSpacing-gTabWidth,gPocketDepth+4], gBitSize, center=true);
+        SpikeBoxT([gXTabSpacing-gTabWidth,gPocketDepth+4], gBitSize, center=true);
     lasttabstart = gXTabSpacing+gTabWidth/2;
     for(x_scale=[1,-1]) scale([x_scale,1]) {
       translate([(gTopSize[0]/2+lasttabstart)/2+3,gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBox([gTopSize[0]/2-lasttabstart+6,gPocketDepth+4], gBitSize, center=true);
+        SpikeBoxT([gTopSize[0]/2-lasttabstart+6,gPocketDepth+4], gBitSize, center=true);
       // Corner
-      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness)/2-12])
-        SpikeBox([gMaterialThickness+6,(gHeight-gMaterialThickness)], gBitSize, center=true);
+      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2])
+        rotate([0,0,180])
+        SpikeBoxT([gMaterialThickness+6,(gHeight-gMaterialThickness-12)], gBitSize, center=true);
     }
   }
 }
@@ -152,14 +153,15 @@ module Stiffener() {
       square([gTopSize[0], gHeight-gMaterialThickness+gPocketDepth-1]);
     for(i=[0])
       translate([gXTabSpacing*i, gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBox([gXTabSpacing-gTabWidth,gPocketDepth+4], gBitSize, center=true);
+        SpikeBoxT([gXTabSpacing-gTabWidth,gPocketDepth+4], gBitSize, center=true);
     lasttabstart = gXTabSpacing*0.5+gTabWidth/2;
     for(x_scale=[1,-1]) scale([x_scale,1]) {
       translate([(gTopSize[0]/2+lasttabstart)/2+3,gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBox([gTopSize[0]/2-lasttabstart+6,gPocketDepth+4], gBitSize, center=true);
+        SpikeBoxT([gTopSize[0]/2-lasttabstart+6,gPocketDepth+4], gBitSize, center=true);
       // Corner
-      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness)/2-12])
-        SpikeBox([gMaterialThickness+6,(gHeight-gMaterialThickness)], gBitSize, center=true);
+      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2])
+        rotate([0,0,180])
+        SpikeBoxT([gMaterialThickness+6,(gHeight-gMaterialThickness-12)], gBitSize, center=true);
     }
   }
 }
