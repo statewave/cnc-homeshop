@@ -1,0 +1,6 @@
+include <../../../_lib/cam/helix_hole.config>;
+include <local.config>;
+
+(cfg:Tool-Number: 2)
+(cfg:Tool-Diameter: 4.0)
+(cfg:Milling-Z-Step: -2.5)
