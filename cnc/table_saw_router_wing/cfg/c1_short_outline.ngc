@@ -4,5 +4,5 @@ include <local.config>;
 (cfg:Holding-Tabs-Activate: 1)
 (cfg:Holding-Tabs-Depth: -10.000000)
 (cfg:Holding-Tabs-Length: 15.000000)
-(cfg:Holding-Tabs-X-Grid: 100.000000)
-(cfg:Holding-Tabs-Y-Grid: 999.000000)
+(cfg:Holding-Tabs-X-Grid: 999.000000)
+(cfg:Holding-Tabs-Y-Grid: 100.000000)
