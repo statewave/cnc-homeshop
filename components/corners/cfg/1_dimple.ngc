@@ -1,0 +1,5 @@
+include <../../../_lib/cam/helix_hole.config>;
+include <local.config>;
+
+(cfg:Milling-Depth: $gPocketDepth)
+(cfg:Milling-Z-Step: -2)
