@@ -1,6 +1,6 @@
 include <port_lib.scad>;
 
-difference() {
+translate(gOffset) difference() {
   offset(delta=10) hull() InsetRabbet();
   InsetRabbet();
 }

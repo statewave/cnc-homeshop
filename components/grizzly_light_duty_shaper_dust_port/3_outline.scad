@@ -1,6 +1,6 @@
 include <port_lib.scad>;
 
-difference() {
+translate(gOffset) difference() {
   Outline();
   Port();
 }

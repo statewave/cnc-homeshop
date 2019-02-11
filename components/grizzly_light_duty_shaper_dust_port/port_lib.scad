@@ -1,15 +1,16 @@
 gMaterialThick = 12;
 gCutDepth = -gMaterialThick - 0.2;
 gPocketDepth = 2;
-gBitSize = 4.0;
+gBitSize = 3.175;
 
 gSpacingX = 150;
 gSpacingY = 65;
 gExtraX = 10;
 gExtraY = 16.5;
-gHoleDia = 4.2;
+gHoleDia = 4.5;
 gPortDia = 63;
 gRabbetSize = [138,82];
+gOffset = [gSpacingX/2+gExtraX,gSpacingY/2+gExtraY];
 
 module Outline() {
   offset(r=3,$fn=32) offset(delta=-3)
