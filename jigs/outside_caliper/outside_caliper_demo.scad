@@ -10,4 +10,4 @@ module DemoLeg() {
 }
 
 DemoLeg();
-translate([0,0,20]) rotate([0,180,0]) DemoLeg();
+//translate([0,0,20]) rotate([0,180,0]) DemoLeg();
