@@ -1,6 +1,6 @@
-include <../../../_lib/cam/helix_hole.config>;
+include <../../../_lib/cam/pocket.config>;
 include <local.config>;
 
-(cfg:Tool-Number: 2)
+(cfg:Milling-Depth: $gPocketDepth)
 (cfg:Tool-Diameter: $gSmallBitSize)
 (cfg:Milling-Z-Step: -2.5)

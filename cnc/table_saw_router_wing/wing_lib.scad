@@ -1,24 +1,55 @@
 include <../../_lib/fillets.scad>;
+include <../../_lib/edge_tabs.scad>;
+include <../../_lib/bolt_hex.scad>;
 
 gMaterialThickness = 18;
 gCutDepth = -gMaterialThickness-0.5;
 gBitSize = 6.35;
+gSmallBitSize = 3.175;
 gPocketDepth = 9;
 
 gMountingCircle = 118;
 gMountingHole = 5.5;
-//gMountingSquare = 98;
+gMountingSquare = 98;
 
 gTopSize = [305,27*25.4];
 gHeight = 50;
 
+gYTabSpacing = 120;
+gXTabSpacing = 105;
+gTabWidth = 40;
+
 gTopOffset = [gTopSize[0]/2,gTopSize[1]/2];
 gSideOffset = [0,gTopSize[1]/2];
-gSideTabs = [-2,-1,0,1,2];
+gSideTabs = [
+  [LEFT_EDGE, -gTopSize[1]/2],
+  [CTAB, -2*gYTabSpacing, gTabWidth],
+  [CTAB, -1*gYTabSpacing, gTabWidth],
+  [CTAB, 0, gTabWidth],
+  [CTAB, 1*gYTabSpacing, gTabWidth],
+  [CTAB, 2*gYTabSpacing, gTabWidth],
+  [RIGHT_EDGE, gTopSize[1]/2]];
+gSideDeepTabs = [
+  [CTAB, -gTopSize[1]/2+gMaterialThickness/2-gBitSize/2, gMaterialThickness+gBitSize],
+  [CTAB, gYTabSpacing*-1.5, gMaterialThickness],
+  [CTAB, gYTabSpacing*1.5, gMaterialThickness],
+  [CTAB, gTopSize[1]/2-gMaterialThickness/2+gBitSize/2, gMaterialThickness+gBitSize],
+];
 gShortSideOffset = [-gTopSize[0]/2,0];
-gShortSideTabs = [-1,0,1];
+gShortSideTabs = [
+  [LEFT_EDGE, -gTopSize[0]/2],
+  [CTAB, -1*gXTabSpacing, gTabWidth],
+  [CTAB, 0, gTabWidth],
+  [CTAB, 1*gXTabSpacing, gTabWidth],
+  [RIGHT_EDGE, gTopSize[0]/2]];
 gStiffenerOffset = [-gTopSize[0]/2,0];
-gStiffenerTabs = [-0.5,0.5];
+gStiffenerTabs = [
+  [LEFT_EDGE, -gTopSize[0]/2],
+  [CTAB, -0.5*gXTabSpacing, gTabWidth],
+  [CTAB, 0.5*gXTabSpacing, gTabWidth],
+  [RIGHT_EDGE, gTopSize[0]/2]];
+
+gFenceBolt = [100,100];
 
 module PCMountingHoles() {
   for(t=[0,120,-120]) rotate([0,0,t+90])
@@ -41,29 +72,31 @@ module Top() {
 
 module TopHoles() {
   PCMountingHoles();
+  for(y_scale=[1,-1]) scale([1, y_scale])
+    translate(gFenceBolt) circle(d=five_sixteenths_inch[0], $fn=32);
 }
-
-gYTabSpacing = 120;
-gXTabSpacing = 105;
-gTabWidth = 40;
 
 module TopPocket() {
   // Long side
   for(x_scale=[1,-1]) scale([x_scale,1])
-    for(i=gSideTabs)
-    translate([-gTopSize[0]/2+gMaterialThickness/2-2,gYTabSpacing*i])
-      SpikeBox([gMaterialThickness+4,gTabWidth], gBitSize, center=true);
+    translate([-gTopSize[0]/2,0])
+    TabsToLeft(gTopSize) EdgeTabF(gBitSize, gMaterialThickness, gSideTabs);
   // Short side
   for(y_scale=[1,-1]) scale([1,y_scale])
-    for(i=gShortSideTabs)
-    translate([gXTabSpacing*i,-gTopSize[1]/2+gMaterialThickness/2-2])
-      SpikeBox([gTabWidth,gMaterialThickness+4], gBitSize, center=true);
+    translate([0,-gTopSize[1]/2])
+    EdgeTabF(gBitSize, gMaterialThickness, gShortSideTabs);
   // Stiffeners
   for(y_scale=[1,-1]) scale([1,y_scale])
-    for(i=gStiffenerTabs)
-    translate([gXTabSpacing*i,-gYTabSpacing*1.5])
-      SpikeBox([gTabWidth,gMaterialThickness], gBitSize, center=true);
+    translate([0,gYTabSpacing*1.5-gMaterialThickness/2])
+    MiddleSlots(gBitSize, gMaterialThickness, gStiffenerTabs);
 }
+
+module TopSmallPocket() {
+  // Fence bolts
+  for(y_scale=[1,-1]) scale([1,y_scale])
+    translate(gFenceBolt) OvercutHex(five_sixteenths_inch[1], gSmallBitSize);
+}
+
 
 module TopDemo() {
   difference() {
@@ -73,28 +106,18 @@ module TopDemo() {
     }
     translate([0,0,gMaterialThickness-gPocketDepth])
       linear_extrude(height=gMaterialThickness,convexity=12) TopPocket();
+    translate([0,0,gMaterialThickness-gPocketDepth])
+      linear_extrude(height=gMaterialThickness,convexity=12) TopSmallPocket();
   }
 }
 
 module Side() {
+  local_pocket_depth = gPocketDepth-1;
   difference() {
     translate([0,-gTopSize[1]/2])
-      square([gHeight-gMaterialThickness+gPocketDepth-1, gTopSize[1]]);
-    for(i=[-1.5,-0.5,0.5,1.5])
-      translate([gPocketDepth/2-2,gYTabSpacing*i])
-        SpikeBox([gPocketDepth+4, gYTabSpacing-gTabWidth], gBitSize, center=true);
-    xcenter = (gHeight-gMaterialThickness)/2+gPocketDepth-1;
-    lasttabstart = gYTabSpacing*2+gTabWidth/2;
-    //translate([0,-lasttabstart]) circle(d=10);
-    //echo(lasttabstart);
-    for(y_scale=[1,-1]) scale([1,y_scale]) {
-      translate([gPocketDepth/2-2, (gTopSize[1]/2+lasttabstart+6)/2])
-        SpikeBoxT([gPocketDepth+4, gTopSize[1]/2-lasttabstart+6], gBitSize, center=true);
-      translate([gPocketDepth+12/2-3,-gTopSize[1]/2+gMaterialThickness/2-2])
-        SpikeBox([12+6,gMaterialThickness+4], gBitSize, center=true);
-      translate([gPocketDepth+12/2-3,-gYTabSpacing*1.5])
-        SpikeBox([12+6,gMaterialThickness], gBitSize, center=true);
-    }
+      square([gHeight-gMaterialThickness+local_pocket_depth, gTopSize[1]]);
+    TabsToLeft(gTopSize) EdgeTabM(gBitSize, local_pocket_depth, gSideTabs);
+    TabsToLeft(gTopSize) EdgeTabF(gBitSize, local_pocket_depth+12, gSideDeepTabs);
   }
 }
 
@@ -128,16 +151,10 @@ module ShortEdge() {
   difference() {
     translate([-gTopSize[0]/2, 0])
       square([gTopSize[0], gHeight-gMaterialThickness+gPocketDepth-1]);
-    for(i=[-0.5,0.5])
-      translate([gXTabSpacing*i, gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBoxT([gXTabSpacing-gTabWidth,gPocketDepth+4], gBitSize, center=true);
-    lasttabstart = gXTabSpacing+gTabWidth/2;
+    EdgeTabM(gBitSize, gPocketDepth, gShortSideTabs);
     for(x_scale=[1,-1]) scale([x_scale,1]) {
-      translate([(gTopSize[0]/2+lasttabstart)/2+3,gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBoxT([gTopSize[0]/2-lasttabstart+6,gPocketDepth+4], gBitSize, center=true);
       // Corner
-      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2])
-        rotate([0,0,180])
+      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+12])
         SpikeBoxT([gMaterialThickness+6,(gHeight-gMaterialThickness-12)], gBitSize, center=true);
     }
   }
@@ -151,16 +168,10 @@ module Stiffener() {
   difference() {
     translate([-gTopSize[0]/2, 0])
       square([gTopSize[0], gHeight-gMaterialThickness+gPocketDepth-1]);
-    for(i=[0])
-      translate([gXTabSpacing*i, gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBoxT([gXTabSpacing-gTabWidth,gPocketDepth+4], gBitSize, center=true);
-    lasttabstart = gXTabSpacing*0.5+gTabWidth/2;
+    EdgeTabM(gBitSize, gPocketDepth, gStiffenerTabs);
     for(x_scale=[1,-1]) scale([x_scale,1]) {
-      translate([(gTopSize[0]/2+lasttabstart)/2+3,gHeight-gMaterialThickness+gPocketDepth/2+1.5])
-        SpikeBoxT([gTopSize[0]/2-lasttabstart+6,gPocketDepth+4], gBitSize, center=true);
       // Corner
-      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2])
-        rotate([0,0,180])
+      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+12])
         SpikeBoxT([gMaterialThickness+6,(gHeight-gMaterialThickness-12)], gBitSize, center=true);
     }
   }
