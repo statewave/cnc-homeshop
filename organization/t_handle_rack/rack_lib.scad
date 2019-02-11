@@ -1,5 +1,5 @@
-gMaterialThick = 19;
-gBitSize = 4;
+gMaterialThick = 21.3;
+gBitSize = 3.175;
 
 CornerPos = [[50,-20],[15,20]];
 CornerRadius = 12;
