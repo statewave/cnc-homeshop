@@ -27,18 +27,26 @@ function GetLeft(tab, bit) =
     (tab[0] == LEFT_EDGE ? tab[1] - bit :
      (tab[0] == RIGHT_EDGE ? tab[1] + bit : "FAIL"))));
 
-module EdgeTabM(bit, thick, tabs) {
+module EdgeTabM(bit, thick, tabs, type=0) {
   for(i=[0:len(tabs)-1]) {
     if(tabs[i][0] == TAB || tabs[i][0] == CTAB) {
       this_right = GetLeft(tabs[i], bit) + tabs[i][2];
       next_left = GetLeft(tabs[i+1], bit);
       translate([this_right, -bit])
-        SpikeBox([next_left-this_right, thick+bit], bit);
+        if(type==0) {
+          SpikeBox([next_left-this_right, thick+bit], bit);
+        } else {
+          HBox([next_left-this_right, thick+bit], bit);
+        }
     } else if (tabs[i][0] == LEFT_EDGE) {
       this_right = GetLeft(tabs[i], bit);
       next_left = GetLeft(tabs[i+1], bit);
       translate([this_right, -bit])
-        SpikeBox([next_left-this_right, thick+bit], bit);
+        if(type==0) {
+          SpikeBox([next_left-this_right, thick+bit], bit);
+        } else {
+          HBox([next_left-this_right, thick+bit], bit);
+        }
     }
   }
 }

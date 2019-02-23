@@ -116,7 +116,7 @@ module Side() {
   difference() {
     translate([0,-gTopSize[1]/2])
       square([gHeight-gMaterialThickness+local_pocket_depth, gTopSize[1]]);
-    TabsToLeft(gTopSize) EdgeTabM(gBitSize, local_pocket_depth, gSideTabs);
+    TabsToLeft(gTopSize) EdgeTabM(gBitSize, local_pocket_depth, gSideTabs, 1);
     TabsToLeft(gTopSize) EdgeTabF(gBitSize, local_pocket_depth+12, gSideDeepTabs);
   }
 }
@@ -151,7 +151,7 @@ module ShortEdge() {
   difference() {
     translate([-gTopSize[0]/2, 0])
       square([gTopSize[0], gHeight-gMaterialThickness+gPocketDepth-1]);
-    EdgeTabM(gBitSize, gPocketDepth, gShortSideTabs);
+    EdgeTabM(gBitSize, gPocketDepth, gShortSideTabs, 1);
     for(x_scale=[1,-1]) scale([x_scale,1]) {
       // Corner
       translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+12])
@@ -168,7 +168,7 @@ module Stiffener() {
   difference() {
     translate([-gTopSize[0]/2, 0])
       square([gTopSize[0], gHeight-gMaterialThickness+gPocketDepth-1]);
-    EdgeTabM(gBitSize, gPocketDepth, gStiffenerTabs);
+    EdgeTabM(gBitSize, gPocketDepth, gStiffenerTabs, 1);
     for(x_scale=[1,-1]) scale([x_scale,1]) {
       // Corner
       translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+12])

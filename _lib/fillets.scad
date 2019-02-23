@@ -15,6 +15,17 @@ module SpikeBox(dims, cutter_dia, center=false, compression_mm=0.2) {
   }
 }
 
+module HBox(dims, cutter_dia, center=false, compression_mm=1) {
+  translate(center ? [0,0] : [dims[0]/2,dims[1]/2]) {
+    xh = dims[0]/2; yh = dims[1]/2;
+    hull() for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
+      polygon(points=[[0,0], [xh,0], [xh,yh-compression_mm], [xh-cutter_dia/2,yh], [0, yh]]);
+    for(x_scale=[1,-1]) scale([x_scale,1])
+      translate([dims[0]/2-cutter_dia/2,dims[1]/2-compression_mm])
+      circle(d=cutter_dia,$fn=64);
+  }
+}
+
 // Half spike box, kind of a T shape with circles down and an extra half-bit
 // extension upward
 module SpikeBoxT(dims, cutter_dia, center=false, compression_mm=0.2) {
