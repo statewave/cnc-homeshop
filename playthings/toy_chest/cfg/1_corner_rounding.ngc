@@ -8,4 +8,4 @@ include <local.config>;
 (cfg:Milling-Z-Step: -1.4)
 
 (( Pilot dia ))
-(cfg:Tool-Diameter: 2.4)
+(cfg:Tool-Diameter: 1.2)
