@@ -1,0 +1,11 @@
+include <../../../_lib/cam/outline.config>;
+include <local.config>;
+
+(( Radius of corner radius mill ))
+(cfg:Milling-Depth: -1.6)
+
+(( Effectively, 2nd pass is finishing ))
+(cfg:Milling-Z-Step: -1.4)
+
+(( Pilot dia ))
+(cfg:Tool-Diameter: 2.4)
