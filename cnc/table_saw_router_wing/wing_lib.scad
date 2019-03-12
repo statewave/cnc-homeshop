@@ -9,7 +9,7 @@ gSmallBitSize = 3.175;
 gPocketDepth = 9;
 
 gMountingCircle = 118;
-gMountingHole = 5.5;
+gMountingHole = 4.5;
 gMountingSquare = 98;
 
 gTopSize = [305,27*25.4];
@@ -57,8 +57,14 @@ module PCMountingHoles() {
 }
 
 module BoschMountingHoles() {
-  for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
-    translate([gMountingSquare/2,gMountingSquare/2]) circle(d=gMountingHole,$fn=32);
+  rotate([0,0,-21.5-90]) {
+    for(x_scale=[1,-1], y_scale=[1,-1]) scale([x_scale,y_scale])
+      translate([gMountingSquare/2,gMountingSquare/2])
+      circle(d=gMountingHole,$fn=32);
+    // fine adjust, via 56/46 distance to holes
+    translate([gMountingSquare/2-54, -gMountingSquare/2-14])
+      circle(d=6, $fn=32);
+  }
 }
 
 module Top() {
@@ -71,6 +77,7 @@ module Top() {
 }
 
 module TopHoles() {
+  BoschMountingHoles();
   PCMountingHoles();
   for(y_scale=[1,-1]) scale([1, y_scale])
     translate(gFenceBolt) circle(d=five_sixteenths_inch[0], $fn=32);
@@ -112,12 +119,11 @@ module TopDemo() {
 }
 
 module Side() {
-  local_pocket_depth = gPocketDepth-1;
   difference() {
     translate([0,-gTopSize[1]/2])
-      square([gHeight-gMaterialThickness+local_pocket_depth, gTopSize[1]]);
-    TabsToLeft(gTopSize) EdgeTabM(gBitSize, local_pocket_depth, gSideTabs, 1);
-    TabsToLeft(gTopSize) EdgeTabF(gBitSize, local_pocket_depth+12, gSideDeepTabs);
+      square([gHeight-gMaterialThickness+gPocketDepth-1, gTopSize[1]]);
+    TabsToLeft(gTopSize) EdgeTabM(gBitSize, gPocketDepth, gSideTabs, 1);
+    TabsToLeft(gTopSize) EdgeTabF(gBitSize, gPocketDepth+12, gSideDeepTabs);
   }
 }
 
@@ -154,7 +160,7 @@ module ShortEdge() {
     EdgeTabM(gBitSize, gPocketDepth, gShortSideTabs, 1);
     for(x_scale=[1,-1]) scale([x_scale,1]) {
       // Corner
-      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+12])
+      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+11.5])
         SpikeBoxT([gMaterialThickness+6,(gHeight-gMaterialThickness-12)], gBitSize, center=true);
     }
   }
@@ -171,7 +177,7 @@ module Stiffener() {
     EdgeTabM(gBitSize, gPocketDepth, gStiffenerTabs, 1);
     for(x_scale=[1,-1]) scale([x_scale,1]) {
       // Corner
-      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+12])
+      translate([gTopSize[0]/2-gMaterialThickness/2+3,(gHeight-gMaterialThickness-12)/2+gPocketDepth+11.5])
         SpikeBoxT([gMaterialThickness+6,(gHeight-gMaterialThickness-12)], gBitSize, center=true);
     }
   }
