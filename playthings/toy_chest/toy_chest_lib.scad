@@ -119,9 +119,9 @@ module Bottom2() {
 }
 
 module Demo(expl=0) {
-  translate([gMaterialThick-expl,0,0]) rotate([0,-90,0]) rotate([0,0,-90]) difference() {
+  translate([gMaterialThick-expl,0,0]) Flip([-gMaterialThick, -W])
+    rotate([0,-90,0]) rotate([0,0,-90]) difference() {
     linear_extrude(height=gMaterialThick, convexity=12) Side();
-    // TODO: Rotate
     translate([0,0,gMaterialThick-gBotPocketDepth])
       linear_extrude(height=gMaterialThick, convexity=8) SidePocket();
   }
@@ -131,9 +131,9 @@ module Demo(expl=0) {
       linear_extrude(height=gMaterialThick, convexity=8) SidePocket();
   }
 
-  translate([0,-W+gMaterialThick-expl,0]) rotate([90,0,0]) difference() {
+  translate([0,-W+gMaterialThick-expl,0]) Flip([L,-gMaterialThick])
+    rotate([90,0,0]) difference() {
     linear_extrude(height=gMaterialThick, convexity=12) Front();
-    // TODO: Rotate this to correct side (if asymmetric pockets)
     translate([0,0,gSidePocketDepth])
       linear_extrude(height=gMaterialThick, convexity=8) BackPocket();
   }
@@ -147,4 +147,8 @@ module Demo(expl=0) {
     translate([0,0,gBotPocketDepth]) linear_extrude(height=gBotTabWidth) Bottom();
     linear_extrude(height=gMaterialThick) Bottom2();
   }
+}
+
+module Flip(box) {
+  translate(box) rotate([0,0,180]) children();
 }
