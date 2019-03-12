@@ -60,8 +60,8 @@ gBaseLongEdgeTabs = [
 
 gClampyFrontTabs = [
   [LEFT_EDGE, 0], // TODO: problem here
-  [CTAB, 30, 20],
-  [CTAB, 70, 20],
+  [CTAB, 25, 20],
+  [CTAB, 60, 20],
   [RIGHT_EDGE, 100],
 ];
 
