@@ -14,7 +14,7 @@ LIB_DIR = $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 CONFIG_LIBS = $(wildcard $(LIB_DIR)/cam/*.config) $(EXTRA_LIB)
 VARS_TARGET= $(patsubst %.scad,%.txt,$(wildcard vars.scad))
 
-ALL_SCAD=$(patsubst %,%.scad,$(PLATES) $(PARTS) $(A_PLATES) $(B_PLATES) $(C_PLATES))
+ALL_SCAD=$(patsubst %,%.scad,$(PLATES) $(PARTS) $(A_PLATES) $(B_PLATES) $(C_PLATES) $(D_PLATES) $(E_PLATES) $(F_PLATES) $(G_PLATES))
 
 .PHONY: all
 all: check parts plates
@@ -32,6 +32,9 @@ plates: $(patsubst %,gcode/%.gcode,$(PLATES)) \
 	$(if $(B_PLATES),gcode/b0_combined.gcode) \
 	$(if $(C_PLATES),gcode/c0_combined.gcode) \
 	$(if $(D_PLATES),gcode/d0_combined.gcode) \
+	$(if $(E_PLATES),gcode/e0_combined.gcode) \
+	$(if $(F_PLATES),gcode/f0_combined.gcode) \
+	$(if $(G_PLATES),gcode/g0_combined.gcode) \
 	$(if $(PLATES),gcode/0_combined.gcode)
 
 .PHONY: demo
@@ -89,6 +92,15 @@ gcode/c0_combined.gcode: $(patsubst %,gcode/%.gcode,$(C_PLATES))
 	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
 	echo "M05" >> "$@"
 gcode/d0_combined.gcode: $(patsubst %,gcode/%.gcode,$(D_PLATES))
+	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
+	echo "M05" >> "$@"
+gcode/e0_combined.gcode: $(patsubst %,gcode/%.gcode,$(E_PLATES))
+	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
+	echo "M05" >> "$@"
+gcode/f0_combined.gcode: $(patsubst %,gcode/%.gcode,$(F_PLATES))
+	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
+	echo "M05" >> "$@"
+gcode/g0_combined.gcode: $(patsubst %,gcode/%.gcode,$(G_PLATES))
 	cat $^ | grep -v '^\(M06\|M05\)' | sed -e 's/^M02/M01/' > "$@"
 	echo "M05" >> "$@"
 
