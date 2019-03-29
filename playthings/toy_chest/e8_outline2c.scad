@@ -1,3 +1,3 @@
 include <production_lib.scad>;
 
-OutlinePlate(0, 2);
+OutlinePlate(1, 2);
