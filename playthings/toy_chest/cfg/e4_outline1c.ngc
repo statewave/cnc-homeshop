@@ -2,4 +2,4 @@ include <../../../_lib/cam/outline.config>;
 include <local.config>;
 
 ( Hopefully stop breaking bits... )
-(cfg:Milling-FeedRate: 2500)
+(cfg:Milling-FeedRate: 1700)
