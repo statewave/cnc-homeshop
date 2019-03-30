@@ -13,7 +13,7 @@ E_PLATES=e1_pocket1 e2_rabbet1a e3_rabbet1b e4_outline1 e4_outline1b e4_outline1
 EXTRA_LIB=../../_lib/edge_tabs.scad ../../_lib/fillets.scad production_lib.scad
 
 # Regular demo
-CAMERA=165,-105,55,67,0,37,1500
+CAMERA=90,-102,100,73,0,315,800
 # Flat demo
 #CAMERA=500,500,0,0,0,0,3100
 

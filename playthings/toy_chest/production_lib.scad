@@ -89,11 +89,13 @@ module SecondFakePocket(n) {
 }
 
 module ProdDemo() {
-  for(n=[0,1,2,3]) {
+  for(n=[0:3]) {
     difference() {
-      linear_extrude(height=gMaterialThick, convexity=20) OutlinePlate(n);
-      translate([0,0,gMaterialThick-gSidePocketDepth]) linear_extrude(height=gMaterialThick, convexity=20) SidePocketPlate(n);
-      translate([0,0,gBotPocketDepth]) linear_extrude(height=gMaterialThick, convexity=20) BottomFakePocketDemo(n);
+      linear_extrude(height=gMaterialThick, convexity=6) {
+        for(j=[0:2]) OutlinePlate(n, j);
+      }
+      translate([0,0,gMaterialThick-gSidePocketDepth]) linear_extrude(height=gMaterialThick, convexity=6) SidePocketPlate(n);
+      translate([0,0,gBotPocketDepth]) linear_extrude(height=gMaterialThick, convexity=6) BottomFakePocketDemo(n);
     }
   }
 }

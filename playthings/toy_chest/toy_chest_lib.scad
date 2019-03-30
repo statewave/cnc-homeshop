@@ -171,7 +171,7 @@ module Demo(expl=0) {
     linear_extrude(height=gMaterialThick) Bottom2();
   }
 
-  translate([gMaterialThick-expl,0,H+expl]) Flip([-gMaterialThick, -W])
+  translate([gMaterialThick-expl,0,H+expl])
     rotate([0,-90,0]) rotate([0,0,-90]) difference() {
     linear_extrude(height=gMaterialThick, convexity=12) LidSide(true);
     translate([0,0,6]) linear_extrude(height=gMaterialThick, convexity=12) difference() {
@@ -182,6 +182,10 @@ module Demo(expl=0) {
   translate([L+expl,0,H+expl]) rotate([0,-90,0]) rotate([0,0,-90]) difference() {
     linear_extrude(height=gMaterialThick, convexity=12) LidSide();
   }
+
+  // TODO: 0.32 is not the right thing to use here
+  translate([0,-W/2,H+expl+W*0.32]) SlatsDemo(gAngles, expl);
+  translate([0,expl,H+expl]) rotate([90,0,0]) LidFrontDemo();
 }
 
 module Flip(box) {
@@ -195,9 +199,9 @@ module LidDemo() {
 module LidFacet(rotations, i=0, tabs=true) {
   if(i==0) translate([-1,0]) square([2,10]);
   rotate([0,0,rotations[i]]) {
-    render() SlatTab(tabs);
+    SlatTab(tabs);
     if(i < len(rotations)-1) {
-      translate([gSlatWidth,0]) render() LidFacet(rotations, i+1, tabs);
+      translate([gSlatWidth,0]) LidFacet(rotations, i+1, tabs);
     }
   }
 }
@@ -235,7 +239,7 @@ module SlatTab(tabs) {
 }
 
 t = size == 1 ? 16 : 15;
-gAngles = [-t/2, -t, -t, t, t/2];
+gAngles = size == 1 ? [-t/2, -t, -t, t, t/2] : [-t/2,-t,-t];
 
 module LidSide(tabs=false, n=0) {
   th = W*0.35;
@@ -281,6 +285,15 @@ module SlatPocket() {
   translate([L,0]) scale([-1,1]) translate([rem, gSlatWidth/2]) TabsToLeft([L, gSlatWidth]) MiddleSlots(gBitSize, gBotTabWidth, gLidSlatTab);
   // approx middle
   translate([L/2-gMaterialThick/2,0]) translate([rem, gSlatWidth/2]) TabsToLeft([L, gSlatWidth]) MiddleSlots(gBitSize, gBotTabWidth, gLidSlatTab);
+}
+
+module SlatsDemo(rotations, expl=0, i=0) {
+  rotate([rotations[i], 0, 0]) {
+    translate([0,0,gMaterialThick+expl]) scale([1,1,-1]) SlatDemo();
+    if(i < len(rotations)-1) {
+      translate([0,gSlatWidth,0]) SlatsDemo(rotations, expl, i+1);
+    }
+  }
 }
 
 module LidFrontDemo() {
