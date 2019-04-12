@@ -1,0 +1,5 @@
+include <../../../_lib/cam/pocket.config>;
+include <local.config>;
+
+(cfg:Tool-Diameter: 6.35)
+(cfg:Milling-Depth: -6)

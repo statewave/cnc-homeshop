@@ -1,0 +1,5 @@
+include <../../../_lib/cam/outline.config>;
+include <local.config>;
+
+(cfg:Tool-Diameter: 6.35)
+(cfg:Milling-Depth: -18.4)
