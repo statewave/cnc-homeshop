@@ -243,7 +243,7 @@ gAngles = size == 1 ? [-t/2, -t, -t, t, t/2] : [-t/2,-t,-t];
 
 module LidSide(tabs=false, n=0) {
   th = W*0.35;
-  difference() {
+  render() difference() {
     square([W, th]);
     translate([W/2,th-gSidePocketDepth+1])
       for(x_scale=[1,-1]) scale([x_scale,1])
@@ -319,3 +319,13 @@ module LidFrontPocket() {
   // approx middle
   translate([L/2-gMaterialThick/2,0]) translate([rem, 0]) TabsToLeft([L, gLidFrontWidth]) MiddleSlots(gBitSize, gBotTabWidth, gLidFrontTab);
 }
+
+module LidSidePattern(I, J) {
+  for (i=[0:I])
+    translate([i*W,0]) children();
+  for (i=[0:J])
+    translate([W*1.5+i*W,W*0.5+25]) rotate([0,0,180]) children();
+  for (i=[0:I])
+    translate([i*W,W*0.7+8]) children();
+}
+

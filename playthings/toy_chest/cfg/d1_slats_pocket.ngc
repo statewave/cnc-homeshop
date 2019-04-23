@@ -2,4 +2,3 @@ include <../../../_lib/cam/helix_hole.config>;
 include <local.config>;
 
 (cfg:Milling-Depth: $gSidePocketDepth)
-(cfg:Milling-Climb: 1)

@@ -1,4 +1,4 @@
 include <production_lib.scad>;
 
-FirstFakePocket(3);
+FirstFakePocket(2);
 

@@ -1,6 +1,4 @@
-include <toy_chest_lib.scad>;
+include <production_lib.scad>;
 
-LidSide(false);
-translate([W,0]) LidSide(false);
-translate([W*1.5,W*0.5+20]) rotate([0,0,180]) LidSide(false);
-
+for(i=[0:5])
+  translate([W*i,0]) translate([-(L*2+W*2+gBitSize*8),0]) LidSides(0);

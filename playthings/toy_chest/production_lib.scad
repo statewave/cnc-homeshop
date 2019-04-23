@@ -1,11 +1,12 @@
 include <toy_chest_lib.scad>;
 
 N_FRONT = 1;
-N_REST = 6;
+N_REST = 7;
 PITCH = 280;
+SLAT_SPACING = 5;
 
 module Slats(type) {
-  spacing = 11;
+  spacing = SLAT_SPACING;
   y_base = (gLidFrontWidth+spacing)*N_FRONT;
   for(i=[0:N_FRONT-1]) translate([0,(gLidFrontWidth+spacing)*i]) {
     if(type==0) { LidFrontPocket(); }
@@ -18,7 +19,7 @@ module Slats(type) {
 }
 
 module FrontSlats(type) {
-  spacing = 11;
+  spacing = SLAT_SPACING;
   for(i=[0:N_FRONT-1]) translate([0,(gLidFrontWidth+spacing)*i]) {
     if(type==0) { LidFrontPocket(); }
     else { LidFrontOutline(); }
@@ -31,10 +32,13 @@ module Sides(type) {
       if(type==0) { SidePocket(); }
       else { Side(); }
     }
-    for(y=[0,H+gBitSize*3]) translate([W+gBitSize*3, y]) {
-      if(type==0) { BackPocket(); }
-      else { Back(); }
-    }
+    translate([W+gBitSize*3,0])
+    if(type==0) { BackPocket(); }
+    else { Back(); }
+
+    translate([W+gBitSize*3,H+gBitSize*3])
+    if(type==0) { BackPocket(); }
+    else { Front(); }
   }
 }
 
@@ -50,10 +54,10 @@ module OutlinePlate(n, type) {
   }
 }
 
-module SidePocketPlate(n) {
+module SidePocketPlate(n, type=1) {
   translate([0,n*PITCH]) {
     Slats(0);
-    Sides(0);
+    if(type==1) Sides(0);
   }
 }
 
