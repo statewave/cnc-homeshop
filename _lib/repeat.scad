@@ -1,4 +1,4 @@
-module Pattern(x_count=1, y_count=1, x_pitch, y_pitch) {
+module Pattern(x_count=1, y_count=1, x_pitch=0, y_pitch=0) {
   for(i=[0:x_count-1], j=[0:y_count-1])
     translate([i*x_pitch, j*y_pitch]) children();
 }
