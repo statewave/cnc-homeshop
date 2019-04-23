@@ -14,7 +14,7 @@ LIB_DIR = $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 CONFIG_LIBS = $(wildcard $(LIB_DIR)/cam/*.config) $(EXTRA_LIB)
 VARS_TARGET= $(patsubst %.scad,%.txt,$(wildcard vars.scad))
 
-ALL_SCAD=$(patsubst %,%.scad,$(PLATES) $(PARTS) $(A_PLATES) $(B_PLATES) $(C_PLATES) $(D_PLATES) $(E_PLATES) $(F_PLATES) $(G_PLATES))
+ALL_SCAD=$(BASE)_demo.scad $(patsubst %,%.scad,$(PLATES) $(PARTS) $(A_PLATES) $(B_PLATES) $(C_PLATES) $(D_PLATES) $(E_PLATES) $(F_PLATES) $(G_PLATES))
 
 .PHONY: all
 all: check parts plates
