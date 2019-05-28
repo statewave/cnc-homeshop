@@ -1,0 +1,5 @@
+include <../../../_lib/cam/pocket.config>;
+include <local.config>;
+
+(cfg:Milling-Depth: $gPocketDepth)
+(cfg:Pockets-Pocket-Stepover: 60)
