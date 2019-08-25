@@ -1,0 +1,5 @@
+include <../../../_lib/cam/pocket.config>;
+include <local.config>;
+
+(cfg:Milling-Depth: -9)
+
