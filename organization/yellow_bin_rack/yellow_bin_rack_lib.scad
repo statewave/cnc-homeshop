@@ -16,6 +16,9 @@ gDepth=gArmHoleSpacing + gHoleInset*2;
 gShelfPitch = 70.0;
 gShelfOffset = 55.0; // from bottom of top reinforcement
 
+gPocketDepth = -1;
+gCutDepth = -gMaterialThickness - 1.0;
+
 gArmHoleClearance = 4.2;
 gArmHoleGrip = 3.3;
 
@@ -33,7 +36,7 @@ gCornerSize = 180;
 gBackFinger = [[0, 0], [1, 15], [0, 65], [1, 110], [0, 160]];
 
 
-include <../scad_lib/joinery.scad>
+//include <../scad_lib/joinery.scad>
 
 module rail_left(aesthetic_radius=5, inside_radius=gBitSize/2) {
   $fn=128;

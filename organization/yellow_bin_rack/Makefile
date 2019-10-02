@@ -1,5 +1,4 @@
-%.dxf: %.scad yellow_bin_rack.scad ../scad_lib/joinery.scad
-	openscad -o $@ $<
+BASE=yellow_bin_rack
+PARTS=top bottom side side_with_rails corner_pieces just_rails
 
-.PHONY: all
-all: top.dxf bottom.dxf side.dxf side_with_rails.dxf corner_pieces.dxf just_rails.dxf
+include ../../_lib/makefile.inc

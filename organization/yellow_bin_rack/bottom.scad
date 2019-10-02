@@ -1,2 +1,2 @@
-include <yellow_bin_rack.scad>
+include <yellow_bin_rack_lib.scad>
 bottom();
