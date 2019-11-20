@@ -1,0 +1,3 @@
+include <../../../_lib/cam/outline.config>;
+include <local.config>;
+(cfg:Milling-Depth: $gCutDepth1)

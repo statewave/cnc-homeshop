@@ -1,0 +1,12 @@
+BASE=dust_gate
+A_PLATES=a1_top_pocket a2_top_outline
+B_PLATES=b1_top_outline
+C_PLATES=c1_slider_holes  c2_slider_outline
+D_PLATES=d1_stationary_outline
+E_PLATES=e1_top_handle_holes e2_top_handle_outline
+F_PLATES=f1_top_handle_holes f2_top_handle_outline_for_switch
+G_PLATES=g1_bottom_handle_holes g2_bottom_handle_outline
+H_PLATES=h1_jig_holes h2_jig_pocket h3_jig_outline
+I_PLATES=i1_jig_pocket i2_jig_outline
+
+include ../../_lib/makefile.inc
